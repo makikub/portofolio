@@ -1,0 +1,58 @@
+---
+import socialData from '../data/social.json';
+import profileData from '../data/profile.json';
+
+const { contact } = profileData;
+---
+
+<section id="contact" class="section bg-white border-t border-beige-300">
+  <div class="container">
+    <div class="mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-primary">
+        {contact.title}
+      </h2>
+      <p class="text-secondary max-w-2xl">
+        {contact.description}
+      </p>
+    </div>
+
+    <div class="max-w-3xl">
+      <div class="flex flex-col sm:flex-row gap-4 mb-8">
+        <a 
+          href={`mailto:${socialData.email}`}
+          class="btn-primary justify-center"
+        >
+          {contact.primaryButtonText}
+        </a>
+        <a 
+          href={contact.resumeUrl}
+          download
+          class="btn-secondary justify-center"
+        >
+          {contact.secondaryButtonText}
+        </a>
+      </div>
+
+      <div class="pt-8 border-t border-beige-300">
+        <p class="text-sm text-secondary mb-4">
+          {contact.alternativeText}
+        </p>
+        <ul class="space-y-2">
+          <li>
+            <a href={`mailto:${socialData.email}`} class="text-secondary hover:text-primary transition-colors">
+              📧 {socialData.email}
+            </a>
+          </li>
+          {socialData.links.slice(0, 2).map((social) => (
+            <li>
+              <a href={social.url} target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-primary transition-colors">
+                {social.name === 'GitHub' ? '💻' : '💼'} {social.url.replace('https://', '')}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+

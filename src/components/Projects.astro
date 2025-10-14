@@ -1,0 +1,98 @@
+---
+import projectsData from '../data/projects.json';
+import profileData from '../data/profile.json';
+
+const { projects: projectsText } = profileData;
+---
+
+<section id="blog" class="section bg-beige-50 border-t border-beige-300">
+  <div class="container">
+    <div class="mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-primary">
+        {projectsText.title}
+      </h2>
+    </div>
+
+    <!-- Projects List -->
+    <div class="space-y-12 max-w-3xl">
+      {projectsData.projects.map((project) => (
+        <article class="border-b border-beige-300 pb-8 last:border-b-0">
+          {project.image && (
+            <a 
+              href={project.liveUrl || project.githubUrl || '#'} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="block mb-6"
+            >
+              <div class="rounded-lg overflow-hidden border border-beige-300 hover:border-primary transition-colors">
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  class="w-full h-48 md:h-64 object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </a>
+          )}
+          
+          <h3 class="text-xl md:text-2xl font-semibold text-primary mb-3 hover:text-primary-light transition-colors">
+            <a href={project.liveUrl || project.githubUrl || '#'} target="_blank" rel="noopener noreferrer">
+              {project.title}
+            </a>
+          </h3>
+          
+          <p class="text-secondary mb-4 leading-relaxed">
+            {project.description}
+          </p>
+
+          {project.challenge && (
+            <p class="text-sm text-secondary-light mb-4 italic">
+              {projectsText.challengeLabel}: {project.challenge}
+            </p>
+          )}
+
+          <div class="flex flex-wrap gap-2 mb-3">
+            {project.technologies.slice(0, 5).map((tech) => (
+              <span class="text-xs px-3 py-1 bg-white border border-beige-300 text-secondary rounded-full">
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          <div class="flex items-center justify-between text-sm text-secondary-light">
+            <span>{project.duration}</span>
+            {(project.liveUrl || project.githubUrl) && (
+              <a 
+                href={project.liveUrl || project.githubUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="text-primary hover:text-primary-light transition-colors inline-flex items-center gap-1"
+              >
+                {projectsText.viewProjectText}
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- More Projects CTA -->
+    <div class="mt-12 pt-8 border-t border-beige-300">
+      <a 
+        href={projectsText.viewAllUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center text-primary hover:text-primary-light font-medium transition-colors link-underline"
+      >
+        {projectsText.viewAllText}
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+

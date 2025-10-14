@@ -1,0 +1,31 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "料理レシピURL管理システム",
+      "description": "Discordで共有された料理レシピURLを自動収集・分類し、検索可能なWebアプリケーション。AIによる自動カテゴリ分類機能を実装。",
+      "challenge": "DiscordやWebに散在するレシピURLが見つけにくく、後から探すのが困難だった問題を解決。スクレイピング・AI分類・DB化により、過去のレシピを簡単に検索・閲覧できるようになりました。",
+      "result": "月1回の自動データ収集により、レシピ管理の手間を完全に自動化",
+      "technologies": ["Cursor","Next.js", "TypeScript", "Tailwind CSS", "Python", "Supabase", "Discord API", "Claude AI"],
+      "image": "/images/projects/cooking-recipe.png",
+      "liveUrl": "https://cooking-recipe-url.vercel.app",
+      "githubUrl": "https://github.com/makikub/cooking-recipe-url",
+      "duration": "2時間",
+      "role": "フルスタック開発・AI統合"
+    },
+    {
+      "id": 2,
+      "title": "国保連CSV分割ツール",
+      "description": "国保連CSVファイルをレコード種別ごとに自動分割し、ヘッダーを付与するWebアプリケーション。すべての処理がブラウザ内で完結するセキュアな設計。",
+      "challenge": "国保連のCSVファイルを手作業で分割・整形する業務が煩雑で時間がかかっていた問題を解決。ブラウザ内完結の自動分割ツールにより、作業時間を95%削減しました。",
+      "result": "手作業30分の処理が数秒で完了、データの外部送信なしでセキュリティも確保",
+      "technologies": ["Cursor","React", "TypeScript", "Vite", "Tailwind CSS", "PapaParse", "JSZip"],
+      "image": "/images/projects/kokuhoren-csv.png",
+      "liveUrl": "https://kokuhoren-csv-split.pages.dev",
+      "githubUrl": "https://github.com/makikub/kokuhoren-csv-split",
+      "duration": "1時間",
+      "role": "フロントエンド開発・UI/UXデザイン"
+    }
+  ]
+}
+

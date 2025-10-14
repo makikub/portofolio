@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-primary bg-beige-50 antialiased;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl font-bold tracking-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl font-bold tracking-tight;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl font-semibold tracking-tight;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl font-semibold;
+  }
+
+  h5 {
+    @apply text-lg md:text-xl font-semibold;
+  }
+
+  h6 {
+    @apply text-base md:text-lg font-semibold;
+  }
+
+  p {
+    @apply text-base md:text-lg leading-relaxed text-secondary;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer components {
+  .section {
+    @apply py-16 md:py-24 px-4;
+  }
+
+  .container {
+    @apply max-w-5xl mx-auto;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center px-6 py-3 bg-primary text-white font-medium rounded-md hover:bg-primary-light transition-all duration-200;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center px-6 py-3 border-2 border-primary text-primary font-medium rounded-md hover:bg-primary hover:text-white transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-white border border-beige-300 rounded-lg p-6 transition-all duration-200 hover:shadow-md;
+  }
+
+  .link-underline {
+    @apply underline decoration-2 underline-offset-4 hover:decoration-primary-light;
+  }
+
+  .prose {
+    @apply max-w-none;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-light;
+  }
+
+  .bg-pattern {
+    background-image: radial-gradient(circle, #e8e8e0 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+}
+

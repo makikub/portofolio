@@ -1,0 +1,91 @@
+---
+import skillsData from '../data/skills.json';
+import profileData from '../data/profile.json';
+
+const { skills: skillsText } = profileData;
+---
+
+<section id="skills" class="section bg-gray-50">
+  <div class="container">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">
+        <span class="text-gradient">{skillsText.title}</span>
+      </h2>
+      <p class="text-gray-600 text-lg">{skillsText.subtitle}</p>
+    </div>
+
+    <div class="max-w-5xl mx-auto">
+      <div class="grid md:grid-cols-3 gap-8">
+        {skillsData.categories.map((category) => (
+          <div class="card p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+              <span class="w-2 h-2 bg-primary rounded-full mr-3"></span>
+              {category.name}
+            </h3>
+            
+            <div class="space-y-4">
+              {category.skills.map((skill) => (
+                <div>
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-gray-700 font-medium">{skill.name}</span>
+                    <span class="text-sm text-gray-500">{skill.level}%</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                    <div 
+                      class="bg-gradient-to-r from-primary to-secondary h-full rounded-full transition-all duration-1000 ease-out skill-bar"
+                      style={`width: ${skill.level}%`}
+                      data-width={skill.level}
+                    >
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Additional Skills Tags -->
+      <div class="mt-12 text-center">
+        <h4 class="text-lg font-semibold text-gray-700 mb-6">{skillsText.additionalSkillsTitle}</h4>
+        <div class="flex flex-wrap justify-center gap-3">
+          {skillsText.additionalSkills.map((tech) => (
+            <span class="px-4 py-2 bg-white rounded-full text-sm font-medium text-gray-700 shadow-sm hover:shadow-md transition-shadow">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Animate skill bars on scroll
+  const observerOptions = {
+    threshold: 0.5,
+    rootMargin: '0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const skillBars = entry.target.querySelectorAll('.skill-bar');
+        skillBars.forEach((bar) => {
+          const width = (bar as HTMLElement).dataset.width;
+          (bar as HTMLElement).style.width = '0%';
+          setTimeout(() => {
+            (bar as HTMLElement).style.width = `${width}%`;
+          }, 100);
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  const skillsSection = document.querySelector('#skills');
+  if (skillsSection) {
+    observer.observe(skillsSection);
+  }
+</script>
+

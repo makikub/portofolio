@@ -1,0 +1,43 @@
+{
+  "hero": {
+    "welcomeText": "Welcome to",
+    "title": "Portfolio",
+    "description": "masaki.kのシンプルでミニマルなデザインのポートフォリオサイト。"
+  },
+  "about": {
+    "title": "About Me",
+    "paragraphs": [
+      "エンジニアマネージャとして、幅広く対応しています。ツールやバックエンド、インフラに強みがあります。",
+      "これまで、SI業務システム、SaaS、社内ツールなど、様々なWebアプリケーションの開発に携わってきました。",
+      "最新技術のキャッチアップを継続的に行い、プロジェクトに最適な技術選定を心がけています。AI活用も積極的に取り入れ、コードの品質とパフォーマンスにもこだわりを持って開発しています。"
+    ],
+    "ctaText": "お問い合わせはこちら",
+    "ctaLink": "#contact"
+  },
+  "projects": {
+    "title": "Recent Posts",
+    "challengeLabel": "課題",
+    "viewProjectText": "プロジェクトを見る",
+    "viewAllText": "すべてのプロジェクトを見る",
+    "viewAllUrl": "https://github.com/yourusername"
+  },
+  "skills": {
+    "title": "スキル",
+    "subtitle": "Technical Skills",
+    "additionalSkillsTitle": "その他の技術・ツール",
+    "additionalSkills": [
+      "GraphQL", "REST API", "PostgreSQL", "MongoDB",
+      "Redis", "AWS", "CI/CD", "Jest", "Webpack",
+      "Vite", "Figma", "Responsive Design"
+    ]
+  },
+  "contact": {
+    "title": "Get in touch",
+    "description": "プロジェクトのご相談や、お仕事のご依頼など、お気軽にご連絡ください。",
+    "primaryButtonText": "Get in touch",
+    "secondaryButtonText": "Download Resume",
+    "resumeUrl": "/resume.pdf",
+    "alternativeText": "または、以下の方法でもご連絡いただけます："
+  }
+}
+
