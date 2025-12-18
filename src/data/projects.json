@@ -25,6 +25,19 @@
       "githubUrl": "https://github.com/makikub/kokuhoren-csv-split",
       "duration": "1時間",
       "role": "フロントエンド開発・UI/UXデザイン"
+    },
+    {
+      "id": 3,
+      "title": "Link Library",
+      "description": "Discordで共有されたリンクを自動収集し、AIによるカテゴリ分類でアーカイブするナレッジ管理ツール。AI駆動開発、AIツール、チーム育成など多様なトピックを整理。",
+      "challenge": "Discordで共有された有用なリンクが流れてしまい、後から見返すのが困難だった問題を解決。自動収集と分類により、ナレッジの蓄積・検索が容易になりました。",
+      "result": "チームで共有された知見を自動でアーカイブし、必要な時にすぐアクセス可能に",
+      "technologies": ["Claude Code", "Cloudflare Workers", "TypeScript", "Discord API", "Claude AI"],
+      "image": "/images/projects/link-library.png",
+      "liveUrl": "https://mk-link-library.masaki-apple-dev827.workers.dev/",
+      "githubUrl": "https://github.com/makikub/mk-link-library",
+      "duration": "3時間",
+      "role": "フルスタック開発・AI統合"
     }
   ]
 }

@@ -16,7 +16,7 @@
       "name": "Backend",
       "description": "堅牢でスケーラブルなAPI開発",
       "icon": "server",
-      "skills": ["Node.js", "Python", "FastAPI", "Express", "PostgreSQL", "REST API"]
+      "skills": ["Java", "Spring Boot", "Python", "MySQL", "PostgreSQL", "REST API"]
     },
     {
       "name": "Infrastructure",
@@ -29,6 +29,12 @@
       "description": "効率的な開発ワークフロー",
       "icon": "palette",
       "skills": ["Figma", "VS Code", "Notion", "Slack", "Jira", "Adobe XD"]
+    },
+    {
+      "name": "AI & Automation",
+      "description": "AIを活用した開発効率化",
+      "icon": "sparkles",
+      "skills": ["Claude Code", "Cursor", "Codex", "NotebookLM"]
     }
   ]
 }
