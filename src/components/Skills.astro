@@ -1,91 +1,54 @@
 ---
 import skillsData from '../data/skills.json';
-import profileData from '../data/profile.json';
 
-const { skills: skillsText } = profileData;
+// Icon SVG paths (Lucide-style)
+const categoryIcons: Record<string, string> = {
+  'users': 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
+  'layout': 'M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM3 9h18M9 21V9',
+  'server': 'M2 5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5zM2 15a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-4zM6 7h.01M6 17h.01',
+  'cloud': 'M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z',
+  'palette': 'M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.93 0 1.6-.69 1.6-1.6 0-.42-.16-.8-.42-1.08-.28-.3-.42-.66-.42-1.08 0-.93.69-1.6 1.6-1.6H16c3.3 0 6-2.7 6-6 0-5.5-4.5-10-10-10zM6.5 12a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM9.5 8a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM14.5 8a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM17.5 12a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z',
+};
 ---
 
-<section id="skills" class="section bg-gray-50">
-  <div class="container">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-4">
-        <span class="text-gradient">{skillsText.title}</span>
-      </h2>
-      <p class="text-gray-600 text-lg">{skillsText.subtitle}</p>
+<section id="skills" class="py-24 px-6 bg-white relative">
+  <div class="max-w-6xl mx-auto">
+    <div class="mb-20">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 animate-on-scroll">
+        <div>
+          <h2 class="text-4xl font-bold text-neutral-900 mb-4 tracking-tight">Skills & Expertise</h2>
+          <p class="text-neutral-500 max-w-xl text-lg leading-relaxed">
+            エンジニアリングマネージャーとしての組織作りから、<br class="hidden md:block" />
+            フルスタック開発まで幅広い領域をカバーします。
+          </p>
+        </div>
+        <div class="hidden md:block h-px bg-neutral-200 flex-1 ml-12 mb-4"></div>
+      </div>
     </div>
 
-    <div class="max-w-5xl mx-auto">
-      <div class="grid md:grid-cols-3 gap-8">
-        {skillsData.categories.map((category) => (
-          <div class="card p-6">
-            <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
-              <span class="w-2 h-2 bg-primary rounded-full mr-3"></span>
-              {category.name}
-            </h3>
-            
-            <div class="space-y-4">
-              {category.skills.map((skill) => (
-                <div>
-                  <div class="flex justify-between items-center mb-2">
-                    <span class="text-gray-700 font-medium">{skill.name}</span>
-                    <span class="text-sm text-gray-500">{skill.level}%</span>
-                  </div>
-                  <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-                    <div 
-                      class="bg-gradient-to-r from-primary to-secondary h-full rounded-full transition-all duration-1000 ease-out skill-bar"
-                      style={`width: ${skill.level}%`}
-                      data-width={skill.level}
-                    >
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {skillsData.categories.map((category) => (
+        <div
+          class="group p-8 bg-neutral-50 rounded-2xl border border-neutral-100 hover:border-neutral-200 hover:shadow-xl hover:shadow-neutral-100/50 transition-all duration-300 animate-on-scroll"
+        >
+          <div class="w-12 h-12 bg-white rounded-xl border border-neutral-100 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+            <svg class="w-6 h-6 text-neutral-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d={categoryIcons[category.icon] || categoryIcons['layout']} />
+            </svg>
           </div>
-        ))}
-      </div>
 
-      <!-- Additional Skills Tags -->
-      <div class="mt-12 text-center">
-        <h4 class="text-lg font-semibold text-gray-700 mb-6">{skillsText.additionalSkillsTitle}</h4>
-        <div class="flex flex-wrap justify-center gap-3">
-          {skillsText.additionalSkills.map((tech) => (
-            <span class="px-4 py-2 bg-white rounded-full text-sm font-medium text-gray-700 shadow-sm hover:shadow-md transition-shadow">
-              {tech}
-            </span>
-          ))}
+          <h3 class="text-xl font-bold text-neutral-900 mb-2">{category.name}</h3>
+          <p class="text-neutral-500 text-sm mb-6">{category.description}</p>
+
+          <div class="flex flex-wrap gap-2">
+            {category.skills.map((skill) => (
+              <span class="skill-tag group-hover:border-neutral-300 transition-colors">
+                {skill}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
+      ))}
     </div>
   </div>
 </section>
-
-<script>
-  // Animate skill bars on scroll
-  const observerOptions = {
-    threshold: 0.5,
-    rootMargin: '0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const skillBars = entry.target.querySelectorAll('.skill-bar');
-        skillBars.forEach((bar) => {
-          const width = (bar as HTMLElement).dataset.width;
-          (bar as HTMLElement).style.width = '0%';
-          setTimeout(() => {
-            (bar as HTMLElement).style.width = `${width}%`;
-          }, 100);
-        });
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  const skillsSection = document.querySelector('#skills');
-  if (skillsSection) {
-    observer.observe(skillsSection);
-  }
-</script>
-

@@ -1,51 +1,44 @@
 ---
-import socialData from '../data/social.json';
 import profileData from '../data/profile.json';
 
 const { hero } = profileData;
-const descriptionLines = hero.description.split('\n');
+const techStack = ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Python'];
 ---
 
-<section id="home" class="min-h-[85vh] flex items-center justify-center bg-beige-50 pt-20 pb-16">
-  <div class="container mx-auto px-4">
-    <div class="text-center max-w-3xl mx-auto">
-      <!-- Welcome Text -->
-      <p class="text-secondary text-sm md:text-base mb-6 tracking-wide uppercase">
-        {hero.welcomeText}
-      </p>
+<section id="home" class="min-h-[90vh] flex items-center justify-center px-6 py-20 relative overflow-hidden bg-neutral-50">
+  <!-- Background decoration -->
+  <div class="absolute inset-0 z-0">
+    <div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-neutral-200/50 rounded-full blur-3xl opacity-30"></div>
+    <div class="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-neutral-300/30 rounded-full blur-3xl opacity-30"></div>
+  </div>
 
-      <!-- Main Title -->
-      <h1 class="text-5xl md:text-7xl font-bold mb-8 tracking-tight text-primary">
-        {hero.title}
-      </h1>
+  <div class="max-w-4xl mx-auto text-center relative z-10">
+    <p class="text-neutral-500 font-medium tracking-[0.2em] mb-6 uppercase text-sm animate-slide-up opacity-0" style="animation-delay: 0s; animation-fill-mode: forwards;">
+      {hero.welcomeText}
+    </p>
 
-      <!-- Description -->
-      <p class="text-lg md:text-xl text-secondary mb-12 leading-relaxed max-w-2xl mx-auto">
-        {descriptionLines.map((line, index) => (
-          <>
-            {line}
-            {index < descriptionLines.length - 1 && <br class="hidden md:block" />}
-          </>
-        ))}
-      </p>
+    <h2 class="text-5xl md:text-7xl font-bold text-neutral-900 mb-8 tracking-tight leading-tight animate-slide-up opacity-0" style="animation-delay: 0.1s; animation-fill-mode: forwards;">
+      Creating Digital <br class="hidden md:block" />
+      <span class="text-neutral-400">Experiences</span>
+    </h2>
 
-      <!-- Social Links -->
-      <div class="flex items-center justify-center gap-6 mb-12">
-        {socialData.links.map((social) => (
-          <a 
-            href={social.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-secondary hover:text-primary transition-colors"
-            aria-label={social.name}
-          >
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d={social.icon} />
-            </svg>
-          </a>
-        ))}
-      </div>
+    <p class="text-neutral-600 mb-12 max-w-2xl mx-auto text-lg leading-relaxed animate-slide-up opacity-0" style="animation-delay: 0.2s; animation-fill-mode: forwards;">
+      {hero.description}
+    </p>
+
+    <div class="flex flex-wrap justify-center gap-3 mb-12 animate-slide-up opacity-0" style="animation-delay: 0.3s; animation-fill-mode: forwards;">
+      {techStack.map((tech) => (
+        <span class="tech-tag">{tech}</span>
+      ))}
+    </div>
+
+    <div class="animate-slide-up opacity-0" style="animation-delay: 0.4s; animation-fill-mode: forwards;">
+      <a href="#projects" class="btn-primary">
+        プロジェクトを見る
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
     </div>
   </div>
 </section>
-

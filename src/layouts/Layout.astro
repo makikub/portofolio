@@ -4,9 +4,9 @@ interface Props {
   description?: string;
 }
 
-const { 
-  title, 
-  description = "フルスタック開発者のポートフォリオサイト。最新技術を使用したプロジェクトと、解決した課題をご紹介します。" 
+const {
+  title,
+  description = "フルスタック開発者のポートフォリオサイト。最新技術を使用したプロジェクトと、解決した課題をご紹介します。"
 } = Astro.props;
 
 const siteTitle = `${title} | ポートフォリオ`;
@@ -20,21 +20,21 @@ const siteTitle = `${title} | ポートフォリオ`;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={siteTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content="/images/og-image.jpg" />
-    
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={siteTitle} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content="/images/og-image.jpg" />
-    
+
     <title>{siteTitle}</title>
   </head>
   <body>
@@ -46,3 +46,27 @@ const siteTitle = `${title} | ポートフォリオ`;
   @import '../styles/global.css';
 </style>
 
+<script>
+  // Intersection Observer for scroll-triggered animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const element = entry.target as HTMLElement;
+        element.classList.add('animate-slide-up');
+        element.style.opacity = '1';
+        observer.unobserve(element);
+      }
+    });
+  }, observerOptions);
+
+  // Observe all elements with animate-on-scroll class
+  document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    (el as HTMLElement).style.opacity = '0';
+    observer.observe(el);
+  });
+</script>

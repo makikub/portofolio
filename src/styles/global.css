@@ -2,88 +2,100 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
 @layer base {
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply font-sans text-primary bg-beige-50 antialiased;
+    @apply font-sans text-neutral-900 bg-neutral-50 antialiased;
   }
 
   h1 {
-    @apply text-4xl md:text-5xl font-bold tracking-tight;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
   }
 
   h2 {
-    @apply text-3xl md:text-4xl font-bold tracking-tight;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
   }
 
   h3 {
-    @apply text-2xl md:text-3xl font-semibold tracking-tight;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.4;
   }
 
   h4 {
-    @apply text-xl md:text-2xl font-semibold;
-  }
-
-  h5 {
-    @apply text-lg md:text-xl font-semibold;
-  }
-
-  h6 {
-    @apply text-base md:text-lg font-semibold;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.4;
   }
 
   p {
-    @apply text-base md:text-lg leading-relaxed text-secondary;
+    font-size: 1rem;
+    line-height: 1.7;
+    @apply text-neutral-600;
   }
 
   a {
     @apply transition-colors duration-200;
+    text-decoration: none;
   }
 }
 
 @layer components {
   .section {
-    @apply py-16 md:py-24 px-4;
+    @apply py-24 px-6;
   }
 
   .container {
-    @apply max-w-5xl mx-auto;
+    @apply max-w-6xl mx-auto;
   }
 
   .btn-primary {
-    @apply inline-flex items-center px-6 py-3 bg-primary text-white font-medium rounded-md hover:bg-primary-light transition-all duration-200;
+    @apply inline-flex items-center gap-2 px-8 py-4 bg-neutral-900 text-white font-medium rounded-full hover:bg-neutral-800 transition-all duration-200 hover:scale-105 active:scale-95;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center px-6 py-3 border-2 border-primary text-primary font-medium rounded-md hover:bg-primary hover:text-white transition-all duration-200;
+    @apply inline-flex items-center px-6 py-3 border border-neutral-200 text-neutral-700 font-medium rounded-full hover:border-neutral-300 hover:bg-neutral-50 transition-all duration-200;
   }
 
   .card {
-    @apply bg-white border border-beige-300 rounded-lg p-6 transition-all duration-200 hover:shadow-md;
+    @apply bg-neutral-50 border border-neutral-100 rounded-2xl p-8 transition-all duration-300 hover:border-neutral-200 hover:shadow-xl hover:shadow-neutral-100/50;
+  }
+
+  .skill-tag {
+    @apply px-3 py-1.5 bg-white text-neutral-600 text-sm font-medium rounded-lg border border-neutral-200 shadow-sm;
+  }
+
+  .tech-tag {
+    @apply px-5 py-2.5 bg-white border border-neutral-200 text-neutral-700 rounded-full text-sm font-medium shadow-sm hover:border-neutral-300 transition-colors cursor-default;
   }
 
   .link-underline {
-    @apply underline decoration-2 underline-offset-4 hover:decoration-primary-light;
-  }
-
-  .prose {
-    @apply max-w-none;
+    @apply underline decoration-2 underline-offset-4 hover:decoration-neutral-400;
   }
 }
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-light;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-neutral-900 to-neutral-600;
   }
 
   .bg-pattern {
-    background-image: radial-gradient(circle, #e8e8e0 1px, transparent 1px);
+    background-image: radial-gradient(circle, #e5e5e5 1px, transparent 1px);
     background-size: 20px 20px;
   }
-}
 
+  /* Animation delays for stagger effect */
+  .delay-0 { animation-delay: 0s; }
+  .delay-100 { animation-delay: 0.1s; }
+  .delay-200 { animation-delay: 0.2s; }
+  .delay-300 { animation-delay: 0.3s; }
+  .delay-400 { animation-delay: 0.4s; }
+  .delay-500 { animation-delay: 0.5s; }
+}
