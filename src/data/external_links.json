@@ -1,0 +1,18 @@
+{
+    "platforms": [
+        {
+            "name": "Zenn",
+            "url": "https://zenn.dev/makikubo",
+            "description": "技術記事の投稿プラットフォーム。主に技術的な知見やアウトプットを公開しています。",
+            "color": "#3EA8FF",
+            "icon": "zenn"
+        },
+        {
+            "name": "Wantedly",
+            "url": "https://www.wantedly.com/id/masaki_kubota_i",
+            "description": "ビジネスSNS。これまでの経歴や、仕事に対する想い、プロジェクトの裏話などをまとめています。",
+            "color": "#00A89C",
+            "icon": "wantedly"
+        }
+    ]
+}
