@@ -59,7 +59,7 @@ npm run preview  # ビルド後のプレビュー
 Cloudflare PagesでGitHub連携デプロイ。
 
 - Project name: `masaki-portfolio`
-- Production URL: https://masaki-portfolio.pages.dev
+- Production URL: https://masaki-portfolio-dqt.pages.dev
 - Build command: `npm run build`
 - Build output directory: `dist`
 - Deploy branch: `main`

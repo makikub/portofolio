@@ -4,7 +4,7 @@ import tailwind from '@astrojs/tailwind';
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind()],
-  site: 'https://masaki-portfolio.pages.dev',
+  site: 'https://masaki-portfolio-dqt.pages.dev',
   build: {
     assets: 'assets'
   }

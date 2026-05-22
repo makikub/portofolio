@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://masaki-portfolio.pages.dev/sitemap.xml
+Sitemap: https://masaki-portfolio-dqt.pages.dev/sitemap.xml

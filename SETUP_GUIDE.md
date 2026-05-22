@@ -155,7 +155,7 @@ Node.js version: 20
 ### 4. デプロイ確認
 
 ```bash
-curl -I https://masaki-portfolio.pages.dev
+curl -I https://masaki-portfolio-dqt.pages.dev
 ```
 
 期待値は `HTTP/2 200` です。
@@ -163,12 +163,13 @@ curl -I https://masaki-portfolio.pages.dev
 HTML内のOGP/Twitter Card URLも確認します。
 
 ```bash
-curl -L https://masaki-portfolio.pages.dev
+curl -L https://masaki-portfolio-dqt.pages.dev
 ```
 
-出力に `https://masaki-portfolio.pages.dev/` が含まれていれば、Astroの `site` 設定が反映されています。
+出力に `https://masaki-portfolio-dqt.pages.dev/` が含まれていれば、Astroの `site` 設定が反映されています。
 
 Cloudflare Pages確認完了までは、ロールバック用に `firebase.json` と既存Firebase Hostingを残します。
+本番URL: https://masaki-portfolio-dqt.pages.dev
 旧Firebase URL: https://masaki-k-portofolio.web.app
 
 ### カスタムドメインの設定（オプション）

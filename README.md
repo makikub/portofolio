@@ -185,12 +185,13 @@ Node.js version: 20
 GitHubの `main` ブランチにpushすると、Cloudflare Pagesが自動でビルド・デプロイします。
 
 ```bash
-curl -I https://masaki-portfolio.pages.dev
+curl -I https://masaki-portfolio-dqt.pages.dev
 ```
 
 期待値は `HTTP/2 200` です。
 
 Cloudflare Pages確認完了までは、ロールバック用に `firebase.json` と既存Firebase Hostingを残します。
+本番URL: https://masaki-portfolio-dqt.pages.dev
 旧Firebase URL: https://masaki-k-portofolio.web.app
 
 ### カスタムドメインの設定（オプション）
