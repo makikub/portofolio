@@ -127,61 +127,53 @@ colors: {
 - サイトのデフォルト説明文
 - OG画像のパス
 
-## 🔥 Firebase Hosting設定
+## Cloudflare Pages設定
 
-### 1. Firebase プロジェクトの作成
-
-1. [Firebase Console](https://console.firebase.google.com/) にアクセス
-2. 「プロジェクトを追加」をクリック
-3. プロジェクト名を入力（例：my-portfolio）
-4. Google Analyticsは任意で設定
-
-### 2. Firebase CLIのインストール
+### 1. ローカルビルド確認
 
 ```bash
-npm install -g firebase-tools
-```
-
-### 3. ログイン
-
-```bash
-firebase login
-```
-
-### 4. プロジェクトIDの設定
-
-`.firebaserc` を編集：
-
-```json
-{
-  "projects": {
-    "default": "あなたのプロジェクトID"
-  }
-}
-```
-
-プロジェクトIDは Firebase Console の「プロジェクトの設定」で確認できます。
-
-### 5. 初回デプロイ
-
-```bash
-# ビルド
 npm run build
-
-# デプロイ
-firebase deploy
 ```
 
-成功すると、以下のようなURLが表示されます：
+### 2. Cloudflare Pagesプロジェクト作成
+
+Cloudflare PagesでGitHubリポジトリを接続し、以下の設定でプロジェクトを作成します。
+
+```txt
+Project name: masaki-portfolio
+Framework preset: Astro
+Build command: npm run build
+Build output directory: dist
+Deploy branch: main
+Node.js version: 20
 ```
-Hosting URL: https://your-project-id.web.app
+
+### 3. 初回デプロイ
+
+`main` ブランチにpushすると、Cloudflare Pagesが自動でビルド・デプロイします。
+
+### 4. デプロイ確認
+
+```bash
+curl -I https://masaki-portfolio.pages.dev
 ```
+
+期待値は `HTTP/2 200` です。
+
+HTML内のOGP/Twitter Card URLも確認します。
+
+```bash
+curl -L https://masaki-portfolio.pages.dev
+```
+
+出力に `https://masaki-portfolio.pages.dev/` が含まれていれば、Astroの `site` 設定が反映されています。
+
+Cloudflare Pages確認完了までは、ロールバック用に `firebase.json` と既存Firebase Hostingを残します。
+旧Firebase URL: https://masaki-k-portofolio.web.app
 
 ### カスタムドメインの設定（オプション）
 
-1. Firebase Console の「Hosting」セクションを開く
-2. 「カスタムドメインを追加」をクリック
-3. ドメインを入力して、指示に従ってDNS設定を行う
+Cloudflare Pagesの Custom domains から、Cloudflare管理のカスタムドメインを設定できます。
 
 ## ✅ カスタマイズチェックリスト
 
@@ -196,7 +188,7 @@ Hosting URL: https://your-project-id.web.app
 - [ ] OG画像を `public/images/og-image.jpg` に配置
 - [ ] `astro.config.mjs` の `site` URLを自分のドメインに変更
 - [ ] `public/robots.txt` の Sitemap URLを変更
-- [ ] `.firebaserc` にFirebaseプロジェクトIDを設定
+- [ ] Cloudflare Pagesのビルド設定を確認
 - [ ] 自己紹介文を書き換え
 - [ ] SNSリンクを更新
 
@@ -225,29 +217,22 @@ npm run build
 npm run dev
 ```
 
-### Q: Firebase デプロイが失敗する
+### Q: Cloudflare Pages デプロイが失敗する
 
-1. Firebase CLIが最新版か確認：
-```bash
-npm install -g firebase-tools@latest
-```
+1. Cloudflare Pagesのビルドログで失敗箇所を確認
 
-2. 再度ログイン：
-```bash
-firebase logout
-firebase login
-```
+2. Node.js versionが20になっているか確認
 
-3. プロジェクトIDが正しいか確認：
+3. ローカルで同じビルドが通るか確認
 ```bash
-firebase projects:list
+npm run build
 ```
 
 ## 📚 参考リソース
 
 - [Astro ドキュメント](https://docs.astro.build/)
 - [Tailwind CSS ドキュメント](https://tailwindcss.com/docs)
-- [Firebase Hosting ドキュメント](https://firebase.google.com/docs/hosting)
+- [Cloudflare Pages ドキュメント](https://developers.cloudflare.com/pages/)
 - [Google Fonts](https://fonts.google.com/)
 - [Unsplash（無料画像）](https://unsplash.com/)
 
@@ -268,4 +253,3 @@ firebase projects:list
 ---
 
 質問や問題がある場合は、GitHub Issuesで報告してください！
-

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## プロジェクト概要
 
-Astro + Tailwind CSSで構築された静的ポートフォリオサイト。Firebase Hostingにデプロイ。
+Astro + Tailwind CSSで構築された静的ポートフォリオサイト。Cloudflare Pagesにデプロイ。
 
 ## コマンド
 
@@ -12,7 +12,6 @@ Astro + Tailwind CSSで構築された静的ポートフォリオサイト。Fir
 npm run dev      # 開発サーバー起動 (http://localhost:4321)
 npm run build    # 型チェック + 本番ビルド (dist/に出力)
 npm run preview  # ビルド後のプレビュー
-firebase deploy --only hosting  # Firebase Hostingにデプロイ
 ```
 
 ## アーキテクチャ
@@ -57,5 +56,14 @@ firebase deploy --only hosting  # Firebase Hostingにデプロイ
 
 ## デプロイ
 
-Firebase Hosting設定済み。`firebase.json`でdist/を公開ディレクトリとして設定。
-本番URL: https://masaki-k-portofolio.web.app
+Cloudflare PagesでGitHub連携デプロイ。
+
+- Project name: `masaki-portfolio`
+- Production URL: https://masaki-portfolio.pages.dev
+- Build command: `npm run build`
+- Build output directory: `dist`
+- Deploy branch: `main`
+- Node.js version: 20
+
+Cloudflare Pages確認完了までは、ロールバック用に `firebase.json` と既存Firebase Hostingを残す。
+旧Firebase URL: https://masaki-k-portofolio.web.app

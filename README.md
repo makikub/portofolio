@@ -10,7 +10,7 @@ Saralテーマをベースにしたクリーンなデザインが特徴です。
 - 📱 **完全レスポンシブ** - モバイル、タブレット、デスクトップに対応
 - 🔍 **SEO最適化** - メタタグ、OGP、構造化データ対応
 - 🎯 **読みやすさ重視** - タイポグラフィとスペーシングを重視したデザイン
-- 💰 **低コスト運用** - Firebase Hostingの無料枠で運用可能
+- 💰 **低コスト運用** - Cloudflare Pagesの無料枠で運用可能
 
 ## 🎨 デザインテーマ
 
@@ -34,7 +34,7 @@ Saralテーマをベースにしたクリーンなデザインが特徴です。
 - [Astro](https://astro.build/) 4.x - 静的サイトジェネレーター
 - [Tailwind CSS](https://tailwindcss.com/) 3.x - CSSフレームワーク
 - [TypeScript](https://www.typescriptlang.org/) - 型安全性
-- [Firebase Hosting](https://firebase.google.com/products/hosting) - ホスティング
+- [Cloudflare Pages](https://pages.cloudflare.com/) - ホスティング
 
 ## 📦 プロジェクト構造
 
@@ -67,7 +67,7 @@ portofolio/
 │       └── index.astro       # トップページ
 ├── astro.config.mjs          # Astro設定
 ├── tailwind.config.cjs       # Tailwind CSS設定
-├── firebase.json             # Firebase Hosting設定
+├── firebase.json             # 旧Firebase Hosting設定（検証期間中のロールバック用）
 └── package.json              # 依存関係
 ```
 
@@ -157,51 +157,45 @@ theme: {
 @import url('https://fonts.googleapis.com/css2?family=Your+Font&display=swap');
 ```
 
-## 🔥 Firebase Hostingへのデプロイ
+## Cloudflare Pagesへのデプロイ
 
-### 1. Firebase CLIのインストール
+Cloudflare PagesはGitHub連携で自動デプロイします。
 
-```bash
-npm install -g firebase-tools
-```
-
-### 2. Firebaseにログイン
-
-```bash
-firebase login
-```
-
-### 3. Firebaseプロジェクトの作成
-
-[Firebase Console](https://console.firebase.google.com/)でプロジェクトを作成します。
-
-### 4. プロジェクトIDの設定
-
-`.firebaserc` を編集して、作成したプロジェクトIDを設定：
-
-```json
-{
-  "projects": {
-    "default": "your-project-id"
-  }
-}
-```
-
-### 5. ビルドとデプロイ
+### 1. ローカルビルド確認
 
 ```bash
 npm run build
-firebase deploy
 ```
 
-デプロイが完了すると、URLが表示されます：
+### 2. Cloudflare Pages設定
+
+Cloudflare Pagesで以下の設定を使います。
+
+```txt
+Project name: masaki-portfolio
+Framework preset: Astro
+Build command: npm run build
+Build output directory: dist
+Deploy branch: main
+Node.js version: 20
 ```
-Hosting URL: https://your-project-id.web.app
+
+### 3. デプロイ確認
+
+GitHubの `main` ブランチにpushすると、Cloudflare Pagesが自動でビルド・デプロイします。
+
+```bash
+curl -I https://masaki-portfolio.pages.dev
 ```
+
+期待値は `HTTP/2 200` です。
+
+Cloudflare Pages確認完了までは、ロールバック用に `firebase.json` と既存Firebase Hostingを残します。
+旧Firebase URL: https://masaki-k-portofolio.web.app
 
 ### カスタムドメインの設定（オプション）
 
-Firebase Consoleの Hosting セクションから、カスタムドメインを設定できます。
+Cloudflare Pagesの Custom domains から、Cloudflare管理のカスタムドメインを設定できます。
 
 ## 📊 パフォーマンス最適化
 

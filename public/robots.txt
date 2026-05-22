@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yourdomain.com/sitemap.xml
-
+Sitemap: https://masaki-portfolio.pages.dev/sitemap.xml
