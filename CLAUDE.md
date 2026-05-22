@@ -64,6 +64,3 @@ Cloudflare PagesでGitHub連携デプロイ。
 - Build output directory: `dist`
 - Deploy branch: `main`
 - Node.js version: 20
-
-Cloudflare Pages確認完了までは、ロールバック用に `firebase.json` と既存Firebase Hostingを残す。
-旧Firebase URL: https://masaki-k-portofolio.web.app

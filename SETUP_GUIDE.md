@@ -168,9 +168,7 @@ curl -L https://masaki-portfolio-dqt.pages.dev
 
 出力に `https://masaki-portfolio-dqt.pages.dev/` が含まれていれば、Astroの `site` 設定が反映されています。
 
-Cloudflare Pages確認完了までは、ロールバック用に `firebase.json` と既存Firebase Hostingを残します。
 本番URL: https://masaki-portfolio-dqt.pages.dev
-旧Firebase URL: https://masaki-k-portofolio.web.app
 
 ### カスタムドメインの設定（オプション）
 
