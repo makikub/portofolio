@@ -12,15 +12,14 @@ const categoryIcons: Record<string, string> = {
 };
 ---
 
-<section id="skills" class="py-24 px-6 bg-white relative">
+<section id="skills" class="py-18 md:py-24 px-6 bg-neutral-50 relative">
   <div class="max-w-6xl mx-auto">
     <div class="mb-20">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 animate-on-scroll">
         <div>
           <h2 class="text-4xl font-bold text-neutral-900 mb-4 tracking-tight">Skills & Expertise</h2>
           <p class="text-neutral-500 max-w-xl text-lg leading-relaxed">
-            エンジニアリングマネージャーとしての組織作りから、<br class="hidden md:block" />
-            フルスタック開発まで幅広い領域をカバーします。
+            何ができる人かが伝わるよう、実装・設計・運用・チーム支援の観点で整理しています。
           </p>
         </div>
         <div class="hidden md:block h-px bg-neutral-200 flex-1 ml-12 mb-4"></div>
@@ -30,9 +29,9 @@ const categoryIcons: Record<string, string> = {
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {skillsData.categories.map((category) => (
         <div
-          class="group p-8 bg-neutral-50 rounded-2xl border border-neutral-100 hover:border-neutral-200 hover:shadow-xl hover:shadow-neutral-100/50 transition-all duration-300 animate-on-scroll"
+          class="group p-8 bg-white rounded-lg border border-neutral-200 hover:shadow-xl hover:shadow-neutral-100/50 transition-all duration-300 animate-on-scroll"
         >
-          <div class="w-12 h-12 bg-white rounded-xl border border-neutral-100 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+          <div class="w-12 h-12 bg-neutral-50 rounded-lg border border-neutral-100 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300 shadow-sm">
             <svg class="w-6 h-6 text-neutral-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d={categoryIcons[category.icon] || categoryIcons['layout']} />
             </svg>

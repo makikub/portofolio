@@ -2,12 +2,13 @@
 import socialData from '../data/social.json';
 ---
 
-<section id="contact" class="py-24 px-6 bg-white relative overflow-hidden">
+<section id="contact" class="py-18 md:py-24 px-6 bg-white relative overflow-hidden">
   <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-neutral-200 to-transparent"></div>
 
   <div class="max-w-4xl mx-auto relative z-10">
     <div class="text-center mb-16 animate-on-scroll">
-      <h2 class="text-4xl font-bold text-neutral-900 mb-6 tracking-tight">Get in Touch</h2>
+      <p class="text-sm font-semibold text-neutral-500 mb-3">Contact</p>
+      <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-6 tracking-tight">問い合わせ</h1>
       <p class="text-neutral-500 max-w-xl mx-auto text-lg">
         プロジェクトのご相談や、お仕事のご依頼など、<br class="hidden md:block" />
         お気軽にお問い合わせください。
@@ -55,7 +56,7 @@ import socialData from '../data/social.json';
       </div>
 
       <div class="animate-on-scroll">
-        <form class="space-y-6">
+        <form class="space-y-6" action={`mailto:${socialData.email}`} method="post" enctype="text/plain">
           <div>
             <label for="name" class="block text-sm font-medium text-neutral-700 mb-2">
               お名前

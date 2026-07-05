@@ -2,43 +2,29 @@
   "projects": [
     {
       "id": 1,
-      "title": "料理レシピURL管理システム",
-      "description": "Discordで共有された料理レシピURLを自動収集・分類し、検索可能なWebアプリケーション。AIによる自動カテゴリ分類機能を実装。",
-      "challenge": "DiscordやWebに散在するレシピURLが見つけにくく、後から探すのが困難だった問題を解決。スクレイピング・AI分類・DB化により、過去のレシピを簡単に検索・閲覧できるようになりました。",
-      "result": "毎時の自動データ収集により、レシピ管理の手間を完全に自動化。Cloudflareスタックで低コスト運用を実現。",
-      "technologies": ["Claude Code", "Next.js", "TypeScript", "Tailwind CSS", "Cloudflare Workers", "Cloudflare D1", "Cloudflare Pages", "Discord API", "OpenAI GPT"],
-      "image": "/images/projects/cooking-recipe.png",
-      "liveUrl": "https://cooking-recipe-frontend.pages.dev/",
-      "githubUrl": "https://github.com/makikub/cooking-recipe-url",
-      "duration": "2時間",
-      "role": "フルスタック開発・AI統合"
+      "title": "ScreenshotApp",
+      "description": "macOSのメニューバーに常駐し、範囲選択キャプチャから注釈、保存・共有までを素早く行えるスクリーンショット注釈アプリ。",
+      "challenge": "スクリーンショットに矢印・矩形・テキスト・フリーハンド・モザイクを加える作業を、複数アプリにまたがらずその場で完結できるようにしました。",
+      "result": "ワンクリックで範囲選択キャプチャし、フローティングウィンドウで編集、クリップボードコピーやPNG保存まで実行可能。外部依存なしの標準Appleフレームワーク構成で配布しています。",
+      "technologies": ["Swift", "SwiftUI", "AppKit", "CoreImage", "Sparkle", "XcodeGen", "GitHub Pages"],
+      "image": "",
+      "liveUrl": "https://makikub.github.io/screenshot-light-app/",
+      "githubUrl": "https://github.com/makikub/screenshot-light-app",
+      "duration": "個人開発",
+      "role": "macOSアプリ開発"
     },
     {
       "id": 2,
-      "title": "国保連CSV分割ツール",
-      "description": "国保連CSVファイルをレコード種別ごとに自動分割し、ヘッダーを付与するWebアプリケーション。すべての処理がブラウザ内で完結するセキュアな設計。",
-      "challenge": "国保連のCSVファイルを手作業で分割・整形する業務が煩雑で時間がかかっていた問題を解決。ブラウザ内完結の自動分割ツールにより、作業時間を95%削減しました。",
-      "result": "手作業30分の処理が数秒で完了、データの外部送信なしでセキュリティも確保",
-      "technologies": ["Cursor","React", "TypeScript", "Vite", "Tailwind CSS", "PapaParse", "JSZip"],
-      "image": "/images/projects/kokuhoren-csv.png",
-      "liveUrl": "https://kokuhoren-csv-split.pages.dev",
-      "githubUrl": "https://github.com/makikub/kokuhoren-csv-split",
-      "duration": "1時間",
-      "role": "フロントエンド開発・UI/UXデザイン"
-    },
-    {
-      "id": 3,
-      "title": "Link Library",
-      "description": "Discordで共有されたリンクを自動収集し、AIによるカテゴリ分類でアーカイブするナレッジ管理ツール。週次サマリー生成やメモ編集機能も搭載。",
-      "challenge": "Discordで共有された有用なリンクが流れてしまい、後から見返すのが困難だった問題を解決。自動収集と分類により、ナレッジの蓄積・検索が容易になりました。",
-      "result": "チームで共有された知見を自動でアーカイブし、週次サマリーで振り返りも可能に",
-      "technologies": ["Claude Code", "Hono", "Cloudflare Workers", "Cloudflare D1", "TypeScript", "Tailwind CSS", "Discord API", "OpenAI GPT"],
-      "image": "/images/projects/link-library.png",
-      "liveUrl": "https://mk-link-library.masaki-apple-dev827.workers.dev/",
-      "githubUrl": "https://github.com/makikub/mk-link-library",
-      "duration": "3時間",
-      "role": "フルスタック開発・AI統合"
+      "title": "GlassDB",
+      "description": "SQLiteデータベースを開き、テーブル閲覧・行のページング・SQL実行を静かなネイティブUIで行えるmacOSデータベースビューア。",
+      "challenge": "SQLiteファイルの中身を素早く確認したい場面で、テーブル一覧、データグリッド、フィルタ、ソート、値コピー、簡易SQL実行をひとつの作業空間にまとめました。",
+      "result": "サイドバーでテーブルを選び、中央のグリッドで行を確認しながら、必要に応じてSQLワークスペースでアドホックな調査ができるmacOSアプリとして公開しています。",
+      "technologies": ["Swift", "SwiftUI", "AppKit", "SQLite", "Sparkle", "GitHub Pages"],
+      "image": "",
+      "liveUrl": "https://makikub.github.io/glass-db/",
+      "githubUrl": "https://github.com/makikub/glass-db",
+      "duration": "個人開発",
+      "role": "macOSアプリ開発"
     }
   ]
 }
-

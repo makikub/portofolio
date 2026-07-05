@@ -1,0 +1,67 @@
+---
+import socialData from '../data/social.json';
+
+const zenn = socialData.links.find((link) => link.name === 'Zenn');
+const x = socialData.links.find((link) => link.name === 'Twitter');
+
+interface ActivityLink {
+  label: string;
+  title: string;
+  description: string;
+  url: string;
+  icon: string;
+}
+
+const isActivityLink = (link: ActivityLink | undefined): link is ActivityLink => Boolean(link);
+
+const activityLinks = [
+  zenn && {
+    label: 'Zenn',
+    title: '技術記事',
+    description: '技術的な知見や試したことを記事として公開しています。',
+    url: zenn.url,
+    icon: zenn.icon,
+  },
+  x && {
+    label: 'X',
+    title: '日々の発信',
+    description: '開発やAI活用、個人開発まわりの短い発信をしています。',
+    url: x.url,
+    icon: x.icon,
+  },
+].filter(isActivityLink);
+---
+
+<section class="py-18 md:py-24 px-6 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div class="mb-12">
+      <p class="text-sm font-semibold text-neutral-500 mb-3">Activity</p>
+      <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-4 tracking-tight">発信活動</h1>
+      <p class="text-neutral-500 max-w-2xl text-lg leading-relaxed">
+        技術記事や日々の開発メモは、Zenn と X に分けて公開しています。
+      </p>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-2">
+      {activityLinks.map((link) => (
+        <a
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group flex gap-4 p-6 bg-neutral-50 border border-neutral-200 rounded-lg hover:bg-white hover:shadow-xl hover:shadow-neutral-100/50 transition-all"
+        >
+          <div class="w-12 h-12 shrink-0 rounded-lg bg-white border border-neutral-200 flex items-center justify-center">
+            <svg class="w-6 h-6 text-neutral-800" viewBox="0 0 24 24" fill="currentColor">
+              <path d={link.icon} />
+            </svg>
+          </div>
+          <div>
+            <p class="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-1">{link.label}</p>
+            <p class="font-bold text-neutral-900 mb-1">{link.title}</p>
+            <p class="text-sm text-neutral-500 leading-relaxed">{link.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

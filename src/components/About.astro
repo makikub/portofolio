@@ -4,18 +4,19 @@ import profileData from '../data/profile.json';
 const { about } = profileData;
 ---
 
-<section id="about" class="section bg-white border-t border-beige-300">
+<section id="about" class="py-18 md:py-24 px-6 bg-white border-b border-neutral-200">
   <div class="container">
     <div class="mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-primary">
+      <p class="text-sm font-semibold text-neutral-500 mb-3">Profile</p>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 text-neutral-900">
         {about.title}
-      </h2>
+      </h1>
     </div>
 
     <div class="max-w-3xl">
       <div class="prose prose-lg">
         {about.paragraphs.map((paragraph, index) => (
-          <p class={`text-secondary leading-relaxed ${index < about.paragraphs.length - 1 ? 'mb-6' : 'mb-8'}`}>
+          <p class={`text-neutral-600 leading-relaxed ${index < about.paragraphs.length - 1 ? 'mb-6' : 'mb-8'}`}>
             {paragraph}
           </p>
         ))}
@@ -24,7 +25,7 @@ const { about } = profileData;
         <div class="pt-4">
           <a 
             href={about.ctaLink}
-            class="inline-flex items-center text-primary hover:text-primary-light font-medium transition-colors link-underline"
+            class="inline-flex items-center text-neutral-900 hover:text-neutral-600 font-medium transition-colors link-underline"
           >
             {about.ctaText}
             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -36,4 +37,3 @@ const { about } = profileData;
     </div>
   </div>
 </section>
-

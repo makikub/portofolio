@@ -2,12 +2,14 @@
 import socialData from '../data/social.json';
 
 const navItems = [
-  { name: 'ホーム', href: '#home' },
-  { name: 'スキル', href: '#skills' },
-  { name: 'プロジェクト', href: '#projects' },
-  { name: '外部リンク', href: '#external-links' },
-  { name: 'お問い合わせ', href: '#contact' },
+  { name: '作ったもの', href: '/' },
+  { name: '経歴・できること', href: '/profile/' },
+  { name: '発信活動', href: '/activity/' },
+  { name: '問い合わせ', href: '/contact/' },
 ];
+
+const currentPath = Astro.url.pathname;
+const isActive = (href: string) => href === '/' ? currentPath === '/' : currentPath.startsWith(href);
 ---
 
 <header class="sticky top-0 bg-white/80 backdrop-blur-md border-b border-neutral-200 z-50">
@@ -15,7 +17,7 @@ const navItems = [
     <div class="flex items-center justify-between">
       <!-- Logo -->
       <a href="/" class="text-neutral-900 font-semibold text-xl hover:text-neutral-600 transition-colors">
-        Portfolio
+        masaki.k
       </a>
 
       <!-- Desktop Navigation -->
@@ -24,7 +26,10 @@ const navItems = [
           <li>
             <a
               href={item.href}
-              class="text-neutral-600 hover:text-neutral-900 transition-colors"
+              class:list={[
+                'text-sm font-medium transition-colors',
+                isActive(item.href) ? 'text-neutral-950' : 'text-neutral-500 hover:text-neutral-900'
+              ]}
             >
               {item.name}
             </a>
@@ -68,7 +73,10 @@ const navItems = [
           <li>
             <a
               href={item.href}
-              class="block text-neutral-600 hover:text-neutral-900 transition-colors py-2"
+              class:list={[
+                'block py-2 text-sm font-medium transition-colors',
+                isActive(item.href) ? 'text-neutral-950' : 'text-neutral-500 hover:text-neutral-900'
+              ]}
             >
               {item.name}
             </a>
