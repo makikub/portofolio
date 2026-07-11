@@ -6,7 +6,7 @@ interface Props {
 
 const {
   title,
-  description = "フルスタック開発者のポートフォリオサイト。最新技術を使用したプロジェクトと、解決した課題をご紹介します。"
+  description = "複雑な業務と技術をほどき、チームが繰り返し前進できる仕組みに変えるエンジニアのポートフォリオです。"
 } = Astro.props;
 
 const siteTitle = `${title} | ポートフォリオ`;
@@ -26,14 +26,13 @@ const siteTitle = `${title} | ポートフォリオ`;
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={siteTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="/images/og-image.jpg" />
+    <meta property="og:site_name" content="masaki.k Portfolio" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={siteTitle} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content="/images/og-image.jpg" />
 
     <title>{siteTitle}</title>
   </head>
@@ -45,28 +44,3 @@ const siteTitle = `${title} | ポートフォリオ`;
 <style is:global>
   @import '../styles/global.css';
 </style>
-
-<script>
-  // Intersection Observer for scroll-triggered animations
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const element = entry.target as HTMLElement;
-        element.classList.add('animate-slide-up');
-        element.style.opacity = '1';
-        observer.unobserve(element);
-      }
-    });
-  }, observerOptions);
-
-  // Observe all elements with animate-on-scroll class
-  document.querySelectorAll('.animate-on-scroll').forEach(el => {
-    (el as HTMLElement).style.opacity = '0';
-    observer.observe(el);
-  });
-</script>

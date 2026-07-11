@@ -17,19 +17,20 @@ npm run preview  # ビルド後のプレビュー
 ## アーキテクチャ
 
 ### データ駆動設計
-- `src/data/projects.json` - プロジェクト情報（Projects.astro, ProjectCard.astroで使用）
-- `src/data/skills.json` - スキル情報（Skills.astroで使用）
+- `src/data/projects.json` - プロジェクト情報（Projects.astroで使用）
+- `src/data/social.json` - 公開プロフィールへのリンク（Header、ActivityLinks、Contactで使用）
 
 コンテンツ更新はJSONファイルを編集するだけで完了。ホットリロード対応。
 
 ### レイアウト構成
 - `src/layouts/Layout.astro` - ベースレイアウト（SEOメタタグ、OGP設定を含む）
-- `src/pages/index.astro` - エントリーポイント、全コンポーネントを統合
+- `src/pages/index.astro` - projects-first構成のトップページ
+- `src/layouts/CaseLayout.astro` - プロジェクト詳細ページの共通レイアウト
+- `src/pages/projects/*.astro` - ScreenshotApp / GlassDB のケース詳細
+- `src/pages/projects.astro` - 旧一覧URLからトップページへのリダイレクト
 
 ### 静的アセット
-- `public/images/profile.jpg` - プロフィール写真
-- `public/images/projects/` - プロジェクト画像（1200x630px推奨）
-- `public/images/og-image.jpg` - SNSシェア用OGP画像
+- `public/favicon.svg` - ファビコン
 
 ## コーディング規約
 
@@ -39,20 +40,17 @@ npm run preview  # ビルド後のプレビュー
 - JSONデータは `import data from '../data/xxx.json'` でインポート
 
 ### スタイリング
-- Tailwind CSSユーティリティクラスを優先
-- カスタムカラー: `primary`, `secondary`, `beige-50/100/200/300` （tailwind.config.cjsで定義）
-- 共通クラス: `.section`, `.container`, `.btn-primary`, `.btn-secondary`, `.card`
-- モバイルファースト設計、ブレークポイント: `md:`, `lg:`, `xl:`
+- `src/styles/global.css` のデザイントークンを使用
+- 基調色は paper / graphite / cobalt
+- レスポンシブと `prefers-reduced-motion` に対応する
 
 ### データ形式
 
 **projects.json の必須フィールド:**
-- `challenge`: 解決した課題（定量的な改善を含める）
-- `result`: 実際の成果を数値で示す
-- `technologies`: 5〜8個推奨
-
-**skills.json:**
-- `level`: 0〜100の整数（プログレスバー幅として表示）
+- `slug`: ケース詳細ページのURL識別子
+- `challenge`: 解決した課題
+- `result`: 検証・配布を含む成果
+- `technologies`: 使用技術
 
 ## デプロイ
 

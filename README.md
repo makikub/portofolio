@@ -1,12 +1,12 @@
 # ポートフォリオサイト
 
-Astro + Tailwind CSSで構築した、シンプルでミニマルなポートフォリオサイトです。
-Saralテーマをベースにしたクリーンなデザインが特徴です。
+Astro + Tailwind CSSで構築した、個人開発の成果と仕事の進め方を紹介するポートフォリオサイトです。
+作ったものを最初に見せる構成と、paper / graphite / cobaltを基調にしたエディトリアルなデザインを採用しています。
 
 ## 🚀 特徴
 
 - ⚡ **超高速** - Astroの静的サイト生成により、最高のパフォーマンス
-- 🎨 **ミニマルデザイン** - Saralテーマをベースにしたシンプルで美しいUI
+- 🎨 **エディトリアルデザイン** - プロダクトと判断の流れを読みやすく構成
 - 📱 **完全レスポンシブ** - モバイル、タブレット、デスクトップに対応
 - 🔍 **SEO最適化** - メタタグ、OGP、構造化データ対応
 - 🎯 **読みやすさ重視** - タイポグラフィとスペーシングを重視したデザイン
@@ -14,20 +14,17 @@ Saralテーマをベースにしたクリーンなデザインが特徴です。
 
 ## 🎨 デザインテーマ
 
-このサイトは[Saral Theme](https://yashjawale.in/saral-theme-astro/)からインスピレーションを得ています。
-
 **カラースキーム:**
-- Primary: `#1a1a1a` (ダークグレー)
-- Secondary: `#6b6b6b` (ミディアムグレー)
-- Accent: `#f5f5f0` (ベージュ)
-- Background: `#fafaf8` (ライトベージュ)
+- Paper: `#f3f0e8`
+- Graphite: `#262826`
+- Cobalt: `#174cd3`
 
 ## 📋 セクション
 
-- **Hero** - Welcome メッセージとソーシャルリンク
-- **Recent Posts** - プロジェクト/ブログ記事一覧
-- **About Me** - 自己紹介と経歴
-- **Get in touch** - お問い合わせ情報
+- **作ったもの** - ScreenshotApp / GlassDBとケース詳細
+- **仕事の進め方** - Observe → Structure → Operateと仕事の原則
+- **発信活動** - Zenn / Xへの公開導線
+- **問い合わせ** - 公開プロフィールへの導線
 
 ## 🛠️ 技術スタック
 
@@ -41,30 +38,28 @@ Saralテーマをベースにしたクリーンなデザインが特徴です。
 ```
 portofolio/
 ├── public/                    # 静的ファイル
-│   ├── images/               # 画像
-│   │   ├── profile.jpg       # プロフィール写真
-│   │   └── projects/         # プロジェクト画像
 │   ├── robots.txt            # SEO設定
 │   └── favicon.svg           # ファビコン
 ├── src/
 │   ├── components/           # Astroコンポーネント
 │   │   ├── Header.astro      # ヘッダー・ナビゲーション
-│   │   ├── Hero.astro        # ヒーローセクション
-│   │   ├── About.astro       # 自己紹介
-│   │   ├── Skills.astro      # スキル表示
+│   │   ├── HomeIntro.astro   # トップの自己紹介
 │   │   ├── Projects.astro    # プロジェクト一覧
-│   │   ├── ProjectCard.astro # プロジェクトカード
+│   │   ├── ProjectVisual.astro # プロダクト画面表現
+│   │   ├── OperatingModel.astro # 仕事の進め方
 │   │   ├── Contact.astro     # お問い合わせ
 │   │   └── Footer.astro      # フッター
 │   ├── layouts/
-│   │   └── Layout.astro      # ベースレイアウト
+│   │   ├── Layout.astro      # ベースレイアウト
+│   │   └── CaseLayout.astro  # ケース詳細レイアウト
 │   ├── data/                 # データファイル
 │   │   ├── projects.json     # プロジェクト情報
-│   │   └── skills.json       # スキル情報
+│   │   └── social.json       # 公開プロフィールリンク
 │   ├── styles/
 │   │   └── global.css        # グローバルスタイル
 │   └── pages/
-│       └── index.astro       # トップページ
+│       ├── index.astro       # トップページ
+│       └── projects/         # ケース詳細ページ
 ├── astro.config.mjs          # Astro設定
 ├── tailwind.config.cjs       # Tailwind CSS設定
 └── package.json              # 依存関係
@@ -109,52 +104,12 @@ npm run preview
 以下のファイルを編集して、自分の情報に置き換えてください：
 
 - `src/data/projects.json` - プロジェクト情報
-- `src/data/skills.json` - スキル情報
-- `src/components/Footer.astro` - SNSリンク、メールアドレス
-- `src/components/Contact.astro` - 連絡先情報
+- `src/data/social.json` - 公開プロフィールリンク
+- `src/pages/profile.astro` - 経歴・仕事の原則
 
-### 2. 画像の配置
+### 2. デザインの変更
 
-以下の画像を配置してください：
-
-- `public/images/profile.jpg` - プロフィール写真（推奨：500x500px以上）
-- `public/images/projects/*.jpg` - プロジェクト画像（推奨：1200x630px）
-- `public/images/og-image.jpg` - OGP画像（推奨：1200x630px）
-
-### 3. カラースキームの変更
-
-`tailwind.config.cjs` でカラーを変更できます：
-
-```javascript
-theme: {
-  extend: {
-    colors: {
-      primary: {
-        DEFAULT: '#1a1a1a',  // メインテキストカラー
-        light: '#4a4a4a',    // ホバー時のカラー
-      },
-      secondary: {
-        DEFAULT: '#6b6b6b',  // サブテキストカラー
-        light: '#9b9b9b',
-      },
-      beige: {
-        50: '#fafaf8',       // 背景カラー
-        100: '#f5f5f0',
-        200: '#e8e8e0',
-        300: '#d1d1c8',      // ボーダーカラー
-      },
-    },
-  },
-},
-```
-
-### 4. フォントの変更
-
-`src/styles/global.css` でGoogle Fontsのインポートを変更：
-
-```css
-@import url('https://fonts.googleapis.com/css2?family=Your+Font&display=swap');
-```
+色、タイポグラフィ、レスポンシブ設定は `src/styles/global.css` のデザイントークンと共通スタイルで管理します。
 
 ## Cloudflare Pagesへのデプロイ
 
@@ -191,25 +146,33 @@ curl -I https://masaki-portfolio-dqt.pages.dev
 
 本番URL: https://masaki-portfolio-dqt.pages.dev
 
+### 4. 手動デプロイ
+
+GitHub連携の自動デプロイが動かない、または本番URLが古い内容を返し続ける場合は、`dist` を Cloudflare Pages に直接デプロイします。
+
+```bash
+npm run build
+npx wrangler pages deploy dist --project-name masaki-portfolio --branch main
+```
+
+デプロイ後、Cloudflare が返すプレビューURLと本番URLの両方で最新内容を確認します。
+
+```bash
+curl -L https://masaki-portfolio-dqt.pages.dev
+```
+
 ### カスタムドメインの設定（オプション）
 
 Cloudflare Pagesの Custom domains から、Cloudflare管理のカスタムドメインを設定できます。
 
 ## 📊 パフォーマンス最適化
 
-このサイトは以下の最適化が施されています：
+このサイトは以下の最適化を行っています：
 
 - ✅ 静的サイト生成（SSG）
-- ✅ ゼロJavaScriptデフォルト
-- ✅ 画像の遅延読み込み
 - ✅ CSSの自動最小化
-- ✅ キャッシュ制御ヘッダー設定済み
-
-**期待されるLighthouseスコア：**
-- Performance: 95+
-- Accessibility: 95+
-- Best Practices: 95+
-- SEO: 100
+- ✅ レスポンシブ対応
+- ✅ reduced motion対応
 
 ## 🔧 トラブルシューティング
 
@@ -220,12 +183,6 @@ Cloudflare Pagesの Custom domains から、Cloudflare管理のカスタムド�
 rm -rf node_modules package-lock.json
 npm install
 ```
-
-### 画像が表示されない場合
-
-- 画像パスが正しいか確認
-- `public/images/` ディレクトリに画像が配置されているか確認
-- 画像ファイル名が `projects.json` の記載と一致しているか確認
 
 ### スタイルが適用されない場合
 

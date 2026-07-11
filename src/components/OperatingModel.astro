@@ -1,0 +1,24 @@
+---
+const phases = [
+  { no: '01', en: 'OBSERVE', ja: '観察する', body: '利用者、現場、技術の制約を見つける。答えを急がず、判断に必要な事実を揃えます。' },
+  { no: '02', en: 'STRUCTURE', ja: '構造化する', body: '曖昧な論点を分け、選択肢と基準を言葉にする。チームが判断できる状態を作ります。' },
+  { no: '03', en: 'OPERATE', ja: '運用する', body: '一度の成功で終わらせず、検証と改善を繰り返せる手順・道具・仕組みに落とします。' },
+];
+const roles = [
+  { en:'BUILD', ja:'作る', body:'プロダクトや業務ツールを、利用の流れと運用まで含めて実装する。' },
+  { en:'LEAD', ja:'進める', body:'背景と優先度を揃え、複数の専門性が同じ方向へ進めるようにする。' },
+  { en:'ORCHESTRATE', ja:'委ねる', body:'AIに実行を委譲しつつ、意図・評価基準・検証・安全性を人が設計する。' },
+];
+---
+<section class="model-block section-shell" aria-labelledby="model-title">
+  <div class="section-heading split-heading">
+    <div><p class="kicker">HOW I WORK</p><h2 id="model-title">判断を、再現できる流れへ。</h2></div>
+    <p>複雑な課題を、個人の勘や勢いに預けないための3つの動作です。</p>
+  </div>
+  <ol class="phase-list">
+    {phases.map((phase) => <li><span class="phase-no">{phase.no}</span><div><p class="phase-en">{phase.en}</p><h3>{phase.ja}</h3></div><p>{phase.body}</p></li>)}
+  </ol>
+  <div class="role-grid">
+    {roles.map((role) => <article><p>{role.en}</p><h3>{role.ja}</h3><p>{role.body}</p></article>)}
+  </div>
+</section>

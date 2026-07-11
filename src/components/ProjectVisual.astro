@@ -1,0 +1,50 @@
+---
+interface Props {
+  project: 'ScreenshotApp' | 'GlassDB';
+  compact?: boolean;
+}
+
+const { project, compact = false } = Astro.props;
+---
+
+<div class:list={['project-visual', compact && 'project-visual--compact']} aria-label={`${project}の画面イメージ`} role="img">
+  <div class="window-bar">
+    <span></span><span></span><span></span>
+    <small>{project}</small>
+  </div>
+  {project === 'ScreenshotApp' ? (
+    <div class="shot-canvas">
+      <div class="shot-sidebar">
+        <span class="active">↗</span><span>□</span><span>T</span><span>⌁</span>
+      </div>
+      <div class="shot-content">
+        <div class="shot-note">Capture → Annotate → Share</div>
+        <div class="shot-target"></div>
+        <svg viewBox="0 0 260 130" aria-hidden="true">
+          <path d="M48 98 C93 90 102 36 185 37" />
+          <path d="M168 25 L188 37 L171 52" />
+        </svg>
+      </div>
+    </div>
+  ) : (
+    <div class="db-canvas">
+      <aside>
+        <b>TABLES</b>
+        <span class="active">customers</span><span>orders</span><span>products</span>
+      </aside>
+      <div class="db-main">
+        <div class="db-query">SELECT * FROM customers</div>
+        <div class="db-grid">
+          <b>id</b><b>name</b><b>status</b>
+          <span>001</span><span>Aki</span><span>active</span>
+          <span>002</span><span>Ren</span><span>active</span>
+          <span>003</span><span>Sora</span><span>paused</span>
+        </div>
+      </div>
+    </div>
+  )}
+</div>
+
+<style>
+  .project-visual{height:100%;min-height:320px;background:#e7e4dc;padding:clamp(1rem,4vw,2.5rem);display:flex;flex-direction:column;color:#282927}.window-bar{height:34px;border:1px solid #c9c6bd;border-bottom:0;border-radius:10px 10px 0 0;background:#f7f5ee;display:flex;align-items:center;gap:6px;padding:0 12px}.window-bar span{width:8px;height:8px;border-radius:50%;background:#c4c1b8}.window-bar small{margin-left:auto;font:500 10px/1 ui-monospace,monospace;color:#74756f}.shot-canvas,.db-canvas{flex:1;display:flex;border:1px solid #c9c6bd;background:#fff;box-shadow:0 18px 40px rgb(40 41 39 / .12);overflow:hidden}.shot-sidebar{width:48px;padding:12px 8px;border-right:1px solid #e2dfd6;display:flex;flex-direction:column;gap:8px}.shot-sidebar span{height:30px;display:grid;place-items:center;border-radius:5px;font:13px ui-monospace,monospace}.shot-sidebar .active{background:#174cd3;color:#fff}.shot-content{position:relative;flex:1;background:linear-gradient(135deg,#faf9f5,#e9e6de);overflow:hidden}.shot-note{position:absolute;top:17%;left:14%;padding:8px 12px;background:#fff;border:1px solid #d9d5ca;border-radius:5px;font:600 clamp(9px,1.3vw,13px)/1.2 ui-monospace,monospace}.shot-target{position:absolute;right:14%;bottom:18%;width:37%;height:32%;border:2px solid #174cd3;background:rgb(23 76 211 / .06)}.shot-content svg{position:absolute;inset:0;width:100%;height:100%}.shot-content path{fill:none;stroke:#174cd3;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}.db-canvas aside{width:30%;padding:18px 12px;background:#f5f3ec;border-right:1px solid #dedbd1;display:flex;flex-direction:column;gap:5px}.db-canvas aside b{font:600 9px/1 ui-monospace,monospace;letter-spacing:.12em;color:#7d7e78;margin:3px 8px 10px}.db-canvas aside span{padding:8px;border-radius:5px;font-size:clamp(9px,1.2vw,12px)}.db-canvas aside .active{background:#174cd3;color:#fff}.db-main{flex:1;padding:14px;background:#fff;overflow:hidden}.db-query{padding:10px;background:#282927;color:#eae8e1;border-radius:5px;font:clamp(8px,1.1vw,11px)/1.4 ui-monospace,monospace;margin-bottom:12px}.db-grid{display:grid;grid-template-columns:.5fr 1fr 1fr;font:clamp(8px,1.1vw,11px)/1.3 ui-monospace,monospace;border-top:1px solid #ddd9cf;border-left:1px solid #ddd9cf}.db-grid>*{padding:9px 7px;border-right:1px solid #ddd9cf;border-bottom:1px solid #ddd9cf;white-space:nowrap}.db-grid b{background:#f5f3ec}.project-visual--compact{min-height:270px}@media(max-width:640px){.project-visual{min-height:250px;padding:1rem}.shot-sidebar{width:38px}.db-canvas aside{width:35%;padding:12px 6px}}
+</style>

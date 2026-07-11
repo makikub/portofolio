@@ -1,0 +1,14 @@
+---
+import CaseLayout from '../../layouts/CaseLayout.astro';
+---
+<CaseLayout
+  title="GlassDB"
+  lead="データを、静かに見通す。SQLiteとMySQLの確認作業に必要な道具をまとめたmacOSデータベースビューア。"
+  meta={['個人開発', 'macOS 26+', 'SwiftUI + AppKit', 'SQLite / MySQL']}
+  context="データベースの中身を少し確認したいときにも、多機能なツールの設定や複雑な画面が作業を遮ることがあります。必要な情報へ短い動線でたどり着くことを出発点にしました。"
+  decision="テーブル一覧、Dataグリッド、SQLワークスペースを一つのネイティブUIに集約。SQLiteに加え、MySQLNIOによる読み取り専用のMySQL接続にも対応しています。"
+  verification="SQLiteのユニットテストに加え、Docker上の実MySQLとPostgreSQLを使う任意の統合テストを用意。SparkleのTeam IDに起因するクラッシュも、再発しないことを検証しています。"
+  operation="release.shでpackage、appcast生成、検証を一つの手順にしました。署名、公証、Team ID、EdDSA、zipを確認してから、GitHub PagesとSparkleで更新を届けます。"
+  liveUrl="https://makikub.github.io/glass-db/"
+  githubUrl="https://github.com/makikub/glass-db"
+/>

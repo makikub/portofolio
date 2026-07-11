@@ -1,18 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
-import About from '../components/About.astro';
-import Skills from '../components/Skills.astro';
-import ProfileLinks from '../components/ProfileLinks.astro';
+import OperatingModel from '../components/OperatingModel.astro';
 import Footer from '../components/Footer.astro';
+const principles = [
+  ['判断できる状態を作る','背景、制約、責任範囲を整理し、誰かの勘ではなくチームで選べる状態にします。'],
+  ['小さく届け、確かめる','大きな正解を待たず、価値のある最小単位を届け、実際の利用から次を決めます。'],
+  ['経験を型にする','振り返りを文書、タスク、手順、ツールへ変換し、次の人が再利用できる形にします。'],
+  ['実行を委ね、意図を持つ','AIに実行を委譲しても、目的、評価基準、検証、安全性は人が設計します。'],
+  ['リリース後まで扱う','実装だけで区切らず、配布、運用、観測、改善までをプロダクトの一部と考えます。'],
+  ['率直に協働する','分からないことは聞き、曖昧な担当や優先度は残さず、相手への配慮と明瞭さを両立します。'],
+];
 ---
-
-<Layout title="経歴・できること" description="経歴、得意領域、実装・設計・運用・チーム支援でできることをまとめています。">
+<Layout title="経歴・仕事の進め方" description="エンジニアリング、マネジメント、AI orchestrationを横断する仕事の進め方。">
   <Header />
   <main>
-    <About />
-    <Skills />
-    <ProfileLinks />
+    <section class="profile-hero section-shell"><div><p class="kicker">PROFILE</p><h1>作ることと、<br />進めることの間に立つ。</h1></div><div><p>エンジニアリングマネージャとして、プロダクト開発、業務改善、チーム支援に取り組んでいます。</p><p>技術だけ、プロセスだけに閉じず、利用者とチームが継続的に前進できる状態を設計することが仕事です。</p><a class="text-link" href="https://www.wantedly.com/id/masaki_kubota_i" target="_blank" rel="noopener noreferrer">Wantedlyで経歴を見る <span>↗</span></a></div></section>
+    <OperatingModel />
+    <section class="principles section-shell" aria-labelledby="principles-title"><div class="section-heading split-heading"><div><p class="kicker">PRINCIPLES</p><h2 id="principles-title">仕事で大切にしていること。</h2></div><p>会社での経験は、個別の案件を公開せず、そこから得た原則としてまとめています。</p></div><ol>{principles.map((item,index)=><li><span>0{index+1}</span><h3>{item[0]}</h3><p>{item[1]}</p></li>)}</ol></section>
   </main>
   <Footer />
 </Layout>

@@ -1,14 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
+import HomeIntro from '../components/HomeIntro.astro';
 import Projects from '../components/Projects.astro';
+import OperatingModel from '../components/OperatingModel.astro';
+import ActivityLinks from '../components/ActivityLinks.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="作ったもの" description="公開している個人開発・業務改善ツールを中心に紹介するポートフォリオです。">
+<Layout title="前進を仕組みにする" description="複雑な業務と技術をほどき、チームが繰り返し前進できる仕組みに変えるエンジニアのポートフォリオです。">
   <Header />
   <main>
+    <HomeIntro />
     <Projects compact />
+    <OperatingModel />
+    <ActivityLinks compact />
   </main>
   <Footer />
 </Layout>
