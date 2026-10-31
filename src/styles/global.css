@@ -1402,6 +1402,11 @@ a.activity-item:focus-visible {
 }
 
 @media (max-width: 520px) {
+  .case-title-grid h1 {
+    font-size: clamp(2rem, 9vw, 3rem);
+    overflow-wrap: anywhere;
+  }
+
   .section-shell,
   .header-inner,
   .domain-rail,
