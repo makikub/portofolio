@@ -2,6 +2,8 @@
 
 会話全文を後から巡回する代わりに、作業を行ったエージェントが終了時に短い振り返りを保存する。人は毎回のフォーム入力をしない。実験・修正・検証の区切りで、成功だけでなく失敗や保留も残す。
 
+運用で呼ぶ入口は [許可範囲付きハーネス手順](harness-operations.md) の `harness.py`。以下の `worklog.py` は共通保存形式と低レベルCLIの説明です。
+
 ## 共通形式
 
 テンプレート: `tools/article_pipeline/worklog.template.json`
