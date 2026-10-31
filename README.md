@@ -122,55 +122,36 @@ npm run preview
 
 ## Cloudflare Pagesへのデプロイ
 
-Cloudflare PagesはGitHub連携で自動デプロイします。
+既存の `masaki-portfolio` はDirect Upload方式です。CloudflareのGit連携ではなく、`.github/workflows/pages-deployment.yaml` がGitHub Actionsでテスト・ビルドした `dist` を配備します。
 
-### 1. ローカルビルド確認
+### 1. 初期設定
 
-```bash
-npm run build
+対象Cloudflareアカウントに限定したCI専用API token（Account / Cloudflare Pages / Edit）を作成し、以下をこのrepoのActions Secretsに登録します。token値はチャット、ログ、repoへ残しません。この権限は単一project限定ではありません。
+
+- `CLOUDFLARE_API_TOKEN`
+- `CLOUDFLARE_ACCOUNT_ID`
+
+Secretsの登録完了を確認してからworkflowのPRをマージします。既存project・ドメイン・DNSは変更しません。
+
+### 2. 検証と公開
+
+PRではPythonテスト、記事検査、Astro型検査とbuildだけを実行します。mainへのpushでは同じ検証後、Secretsを配備stepだけに渡して既存Pagesへ公開します。検証失敗・Secrets不足・mainの先行更新では公開しません。PR作成だけでは公開されません。
+
+CIはNode.js 22、Python 3.12、lockfileに従う `npm ci` を使用します。公式Actionsをcommit SHA、Wranglerを固定versionで指定しています。依存導入は公式npm registryから行い、既存依存のinstall scriptが実行されます。
+
+```sh
+npm run test:articles
+ASTRO_TELEMETRY_DISABLED=1 npm run build
 ```
 
-### 2. Cloudflare Pages設定
+### 3. 公開確認と失敗時
 
-Cloudflare Pagesで以下の設定を使います。
+GitHub Actionsの実行結果とCloudflareのproduction deploymentを確認し、対象main commitが公開されたことを確かめます。対象ページの見出し・canonical・sitemapも確認してください。存在しないURLでもトップページがHTTP 200で返る場合があるため、HTTP statusだけで成功とは判断しません。
 
-```txt
-Project name: masaki-portfolio
-Framework preset: Astro
-Build command: npm run build
-Build output directory: dist
-Deploy branch: main
-Node.js version: 20
-```
+- 本番URL: https://mklabos.dev
+- Pages URL: https://masaki-portfolio-dqt.pages.dev
 
-### 3. デプロイ確認
-
-GitHubの `main` ブランチにpushすると、Cloudflare Pagesが自動でビルド・デプロイします。
-
-```bash
-curl -I https://mklabos.dev
-```
-
-期待値は `HTTP/2 200` です。
-
-本番URL: https://mklabos.dev
-
-Cloudflare Pages URL: https://masaki-portfolio-dqt.pages.dev
-
-### 4. 手動デプロイ
-
-GitHub連携の自動デプロイが動かない、または本番URLが古い内容を返し続ける場合は、`dist` を Cloudflare Pages に直接デプロイします。
-
-```bash
-npm run build
-npx wrangler pages deploy dist --project-name masaki-portfolio --branch main
-```
-
-デプロイ後、Cloudflare が返すプレビューURLと本番URLの両方で最新内容を確認します。
-
-```bash
-curl -L https://mklabos.dev
-```
+失敗時は原因を修正してから対象runを再実行します。古いcommitのrunはmain先行更新チェックで停止します。手動deployやDNS変更で迂回しません。公開後の不具合は修正またはrevert PRをレビューし、mainへマージして再配備します。
 
 ### 5. カスタムドメイン
 

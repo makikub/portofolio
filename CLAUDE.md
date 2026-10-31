@@ -59,7 +59,11 @@ npm run preview  # ビルド後のプレビュー
 
 ## デプロイ
 
-Cloudflare PagesでGitHub連携デプロイ。
+Cloudflare Pagesの既存Direct UploadプロジェクトへGitHub Actionsからデプロイ。
+`.github/workflows/pages-deployment.yaml` はPRで検証のみ、mainへのpushで検証後に公開する。
+GitHub Actions Secretsの `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` が必要。
+CI専用tokenは対象アカウントのCloudflare Pages Edit権限。値をrepoへ保存しない。
+CloudflareのGit連携ではなく、既存ドメイン・projectを維持する。
 
 - Project name: `masaki-portfolio`
 - Production URL: https://mklabos.dev
@@ -67,4 +71,4 @@ Cloudflare PagesでGitHub連携デプロイ。
 - Build command: `npm run build`
 - Build output directory: `dist`
 - Deploy branch: `main`
-- Node.js version: 20
+- CI Node.js version: 22
