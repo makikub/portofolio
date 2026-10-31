@@ -7,5 +7,6 @@
   ],
   "seed_dir": ".article-local/seeds",
   "state_dir": ".article-local/state",
-  "denied_terms": []
+  "denied_terms": [],
+  "local_sources": []
 }

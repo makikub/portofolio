@@ -11,3 +11,5 @@
 7. `dry-run`を実行し、previewを読み直す。形式検査合格だけで事実確認済みとは扱わない。本人のPRレビューを必須とする。
 
 文体: 既存サイトの「判断と実践」を軸に、具体的で落ち着いた日本語を使う。AIが全て解決したように誇張しない。検証できた範囲とまだ試していないことを書く。成果がなくても再現可能な失敗の学びがあれば候補にできる。
+
+振り返りの保存時は `docs/article-pipeline.md` のprivate envelope形式を使い、本人指定のdevice_id、source_tool、project_id、event_id、選択済みのprivate_refsを付ける。端末識別子や非公開参照をseed本文へ混ぜない。同じ実験を別端末で続ける場合はproject_id/event_idを共有する。MacBook Proや別サービスへ勝手に接続しない。履歴が見えない範囲を実施済みと書かない。

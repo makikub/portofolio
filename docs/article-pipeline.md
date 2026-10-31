@@ -79,3 +79,59 @@ python3 tools/article_pipeline/pipeline.py publish --config .article-local/confi
 将来のジョブはこのrepoをcwdにし、`collect` → ローカルで公開許可済みの種から学びを選別 → `dry-run` → `publish` の順に実行する。価値ある記事種がなければ終了する。生の活動候補しかない場合も終了する。各コマンドのexit codeとruns.jsonlで失敗を通知する。1回に1本まで。自動マージ禁止。
 
 公開ソースの一致とCloudflareのmain連携が確認された後、本人による記事PRのmainへのマージを公開の唯一の入口にする。ブランチ保護と本人レビュー必須化は管理設定を確認してから行う（今回未変更）。直接mainへpushできる既存権限までこのCLIでは禁止できない。
+
+## 複数端末・複数ツールの選択取り込み
+
+全会話の自動同期や横断読取は実装しない。各端末で、作業をしたツール自身に共通プロンプトを使って振り返りを保存させる。Mac mini / MacBook Pro間の転送手段は未接続。SSH・クラウド履歴APIへの接続は行わない。本人が選んだJSONだけを、承認された方法でMac miniのローカルintakeへ渡す。
+
+各振り返りは次のprivate envelopeにする。`seed` は上の共通記事種。`private_refs` は選択した成果物、検証メモ、会話exportなどをあとから本人が確認する参照で、CLIが読み取りに行くことはない。
+
+```json
+{
+  "event_id": "motion-experiment-01",
+  "device_id": "mac-mini",
+  "source_tool": "codex",
+  "project_id": "personal-video",
+  "private_refs": ["selected-local-artifact-reference"],
+  "seed": {"public_release": false}
+}
+```
+
+`device_id` は本人が決めた別名（例: `mac-mini` / `macbook-pro`）。ホスト名やシリアル番号を自動取得しない。`source_tool` は `codex` / `claude-code` / `grokbot` / `manual`。`project_id` と `event_id` は同じ実験について端末間で共有する。各ツールは必要な作業記録だけから振り返りを作成し、非公開の会話本文や秘密値をenvelopeにも貼り付けない。
+
+```sh
+python3 tools/article_pipeline/intake.py --file .article-local/reflection.json --config .article-local/config.json
+```
+
+取り込みはローカルのみ。端末・ツール・project・private refsはstate/intakeへ保存し、公開JSONへ含めない。公開許可がfalseならprivate保存のみ。trueなら既存の公開検査を通ったseedだけseed_dirへ出す。同一project/eventを両端末から入れても1つに統合し、出典を追加する。本文が異なる衝突は上書きせず停止する。内容を見直したrevisionは新しいevent_idを付けるが、既存seed IDの異なる内容も自動上書きしないため、元のseedを本人が整理してから取り込む。異なるevent_idでも公開段階の同じ記事ID・根拠commit検査で重複を抑止する。
+
+GrokbotがこのJSONを出せるか、履歴のexport方法があるかはサービス側の確認が必要。ローカル連携フォルダがあるだけでは会話履歴が読めることを意味しない。
+
+## 選択した作業メモの自動収集
+
+`collect_local.py` はローカルconfigの `local_sources` に指定した**個別ファイルだけ**を読み、私的な候補と下書きの骨子を生成する。再帰的な会話・ホームフォルダ走査は行わない。最近更新されたMarkdown/JSON/text（1ファイル64 KiB以下）を対象に、sourceのSHA-256で同じ内容の再取り込みを抑止する。root外へのsymlink、親ディレクトリ参照、認証・履歴系のファイル名は拒否する。
+
+```json
+{
+  "local_sources": [{
+    "project_id": "personal-experiment",
+    "device_id": "mac-mini",
+    "source_tool": "manual",
+    "root": "/path/to/selected/personal-project",
+    "files": ["README.md", "qa/technical.json"]
+  }]
+}
+```
+
+担当ツールを記録から確定できないメモは `manual` とする。別のCodex/Claude/Grokbotがこの候補をもとに振り返りを作成した場合、envelopeのsource_toolには振り返りの作成ツールを記録し、元の作業担当とは区別する。
+
+```sh
+# 通常の7日分
+python3 tools/article_pipeline/collect_local.py --config .article-local/config.json
+# 初回など、明示した期間だけ取り込む（最大90日）
+python3 tools/article_pipeline/collect_local.py --config .article-local/config.json --days 30
+```
+
+候補は `state/local-candidates/` に保存し、更新日時、内容hash、端末・ツール・project、非公開参照、最大12,000文字の抜粋と下書き骨子を含む。抜粋の切詰めはフラグで示す。作業メモの記述を実施の直接証拠と同一視せず、記事化時は成果物・検証記録との照合が必要。公開許可は常にfalseであり、候補から直接PRにしない。作業を行うエージェントが共通プロンプトで学びを文章化し、公開可能な根拠と本人の許可を揃えたseedだけを公開側へ渡す。専用LLM APIや無人文章生成プロセスの追加接続は未実装。
+
+この機構に設定するローカルパス・実名・具体的な個人実験名と生成された私的下書きは、公開repoに含めない。両端末の同期方法・定期実行は別途設定する。
