@@ -1,0 +1,11 @@
+{
+  "target_repo": "makikub/portofolio",
+  "base": "main",
+  "collect_repos": [],
+  "public_evidence_repos": [
+    "makikub/portofolio"
+  ],
+  "seed_dir": ".article-local/seeds",
+  "state_dir": ".article-local/state",
+  "denied_terms": []
+}

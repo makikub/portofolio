@@ -33,3 +33,7 @@ pnpm-debug.log*
 .firebaserc
 firebase-debug.log
 
+
+# Private intake, candidate metadata, previews and execution logs
+.article-local/
+__pycache__/

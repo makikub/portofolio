@@ -5,9 +5,11 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "npm run articles:check && astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "articles:check": "python3 tools/article_pipeline/pipeline.py check --config tools/article_pipeline/config.example.json",
+    "test:articles": "python3 -m unittest discover -s tests -v"
   },
   "dependencies": {
     "astro": "^4.16.18"
@@ -19,4 +21,3 @@
     "typescript": "^5.7.2"
   }
 }
-

@@ -206,3 +206,7 @@ MIT License - 自由に使用、変更、配布できます。
 ---
 
 **Built with ❤️ using Astro & Tailwind CSS**
+
+## 実践ノートの投稿基盤
+
+AI活用の学びを記事種からDraft PRにする手順は [運用ガイド](docs/article-pipeline.md) を参照。公開サイトとGitHub mainの差分を解消してから有効化してください。定期実行は未登録です。
