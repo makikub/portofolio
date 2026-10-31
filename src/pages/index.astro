@@ -2,19 +2,31 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import HomeIntro from '../components/HomeIntro.astro';
+import About from '../components/About.astro';
+import Expertise from '../components/Expertise.astro';
+import Services from '../components/Services.astro';
+import OrganizationCases from '../components/OrganizationCases.astro';
 import Projects from '../components/Projects.astro';
 import OperatingModel from '../components/OperatingModel.astro';
 import ActivityLinks from '../components/ActivityLinks.astro';
+import Philosophy from '../components/Philosophy.astro';
+import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="前進を仕組みにする" description="複雑な業務と技術をほどき、チームが繰り返し前進できる仕組みに変えるエンジニアのポートフォリオです。">
+<Layout title="AI時代のソフトウェア開発を、組織の仕組みにする" description="AIを活用した開発プロセス設計、AWSアーキテクチャ設計、エンジニアリングマネジメント、技術顧問を支援します。">
   <Header />
   <main>
     <HomeIntro />
-    <Projects compact />
+    <About />
+    <Expertise />
+    <Services />
     <OperatingModel />
+    <OrganizationCases />
+    <Projects />
     <ActivityLinks compact />
+    <Philosophy />
+    <Contact />
   </main>
   <Footer />
 </Layout>

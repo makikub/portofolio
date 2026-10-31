@@ -1,0 +1,43 @@
+---
+const services = [
+  {
+    no: '01',
+    en: 'TECHNICAL ADVISORY',
+    title: '技術顧問',
+    description: '事業と開発の間にある曖昧さを整理し、チームが次の判断をできる状態を作ります。',
+    items: ['要件・仕様レビュー', '技術選定と設計相談', 'コード・開発プロセスレビュー'],
+  },
+  {
+    no: '02',
+    en: 'AI ENABLEMENT',
+    title: 'AI導入支援',
+    description: 'AIツールの選定だけでなく、実務で品質を保ちながら使い続ける開発フローへ落とし込みます。',
+    items: ['Claude Code / Devin活用', 'AIエージェント設計', 'AIレビューと品質基準'],
+  },
+  {
+    no: '03',
+    en: 'AWS ARCHITECTURE REVIEW',
+    title: 'AWS設計レビュー',
+    description: '新規設計と既存構成を、セキュリティ、コスト、可用性、運用の観点からレビューします。',
+    items: ['アーキテクチャ設計', 'セキュリティレビュー', 'コスト・運用最適化'],
+  },
+];
+---
+
+<section id="services" class="services-section section-shell" aria-labelledby="services-title">
+  <div class="section-heading split-heading">
+    <div><p class="kicker">03 / SERVICES</p><h2 id="services-title">支援できること。</h2></div>
+    <p>答えだけを渡すのではなく、判断の背景を共有し、チームに知見と仕組みが残る形で伴走します。</p>
+  </div>
+  <div class="service-list">
+    {services.map((service) => (
+      <article class="service-brief">
+        <span class="service-no">{service.no}</span>
+        <div class="service-name"><p class="kicker">{service.en}</p><h3>{service.title}</h3></div>
+        <p class="service-description">{service.description}</p>
+        <ul>{service.items.map((item) => <li>{item}</li>)}</ul>
+      </article>
+    ))}
+  </div>
+  <div class="services-cta"><p>課題がまだ言語化されていない段階でも構いません。</p><a class="text-link" href="#contact">相談窓口を見る <span aria-hidden="true">↓</span></a></div>
+</section>

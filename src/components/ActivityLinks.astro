@@ -2,14 +2,22 @@
 import socialData from '../data/social.json';
 interface Props { compact?: boolean; }
 const { compact = false } = Astro.props;
-const links = [
-  { name:'Zenn', label:'技術記事', description:'実装で得た知見、試したこと、再現できる手順を公開しています。', url:socialData.links.find((link) => link.name === 'Zenn')?.url },
-  { name:'X', label:'日々の発信', description:'開発、AI活用、個人開発の過程で考えたことを短く記録しています。', url:socialData.links.find((link) => link.name === 'Twitter')?.url },
-].filter((link) => link.url);
+const allLinks = [
+  { name:'SPEAKER DECK / TALK', label:'Claude Code 組織展開の効果検証', description:'単一指標に頼らず、PR数・リードタイム・利用状況から組織導入をどう評価するかを紹介しています。', url:'https://speakerdeck.com/makikub/tokunshu-taketehace-renai-claude-code-zu-zhi-zhan-kai-noxiao-guo-jian-zheng-karaxue-ntakoto' },
+  { name:'FINDY TOOLS / CASE', label:'Claude Codeの段階導入', description:'個人検証からパイロット、全社展開、OpenTelemetryによる可視化までの実践を公開しています。', url:'https://findy-tools.io/products/claudecode/1065/825' },
+  { name:'COMPANY NOTE / ARTICLE', label:'AI活用を組織に根づかせる', description:'毎週の相談会、ニュース共有、Slackでのナレッジ化を通した文化づくりをまとめています。', url:'https://note.rehabforjapan.com/n/n0713a0fed3a5' },
+  { name:'ZENN / WRITING', label:'技術記事', description:'実装で得た知見、試したこと、再現できる手順を公開しています。', url:socialData.links.find((link) => link.name === 'Zenn')?.url },
+  { name:'FINDY TOOLS / CASE', label:'Clineによる開発進捗の回復', description:'大規模開発への先行導入、計画モードの活用、1件の改修で得た結果を紹介しています。', url:'https://findy-tools.io/products/cline/410/668' },
+  { name:'X / NOTES', label:'日々の発信', description:'開発、AI活用、個人開発の過程で考えたことを短く記録しています。', url:socialData.links.find((link) => link.name === 'Twitter')?.url },
+];
+const links = compact ? allLinks.slice(0, 4) : allLinks;
 ---
-<section class:list={['activity-section section-shell', compact && 'activity-section--compact']} aria-labelledby="activity-title">
-  <div class="section-heading split-heading"><div><p class="kicker">WRITING & NOTES</p>{compact ? <h2 id="activity-title">考えたことを、外へ。</h2> : <h1 id="activity-title">発信活動</h1>}</div><p>経験をその場限りにせず、次の判断に使える形で残します。</p></div>
+<section id="writing" class:list={['activity-section section-shell', compact && 'activity-section--compact']} aria-labelledby="activity-title">
+  <div class="section-heading split-heading"><div><p class="kicker">07 / SPEAKING & WRITING</p>{compact ? <h2 id="activity-title">学びを、チームと外へ。</h2> : <h1 id="activity-title">発信活動</h1>}</div><p>経験をその場限りにせず、チームや次の判断に使える形で共有します。</p></div>
   <div class="activity-list">
-    {links.map((link, index) => <a href={link.url} target="_blank" rel="noopener noreferrer"><span>0{index + 1}</span><div><p class="kicker">{link.name}</p><h2>{link.label}</h2><p>{link.description}</p></div><span class="arrow" aria-hidden="true">↗</span></a>)}
+    {links.map((link, index) => (
+      <a class="activity-item" href={link.url} target="_blank" rel="noopener noreferrer"><span>0{index + 1}</span><div><p class="kicker">{link.name}</p><h3>{link.label}</h3><p>{link.description}</p></div><span class="arrow" aria-hidden="true">↗</span></a>
+    ))}
   </div>
+  {compact && <div class="activity-more"><a class="text-link" href="/activity/">発信をすべて見る <span aria-hidden="true">→</span></a></div>}
 </section>

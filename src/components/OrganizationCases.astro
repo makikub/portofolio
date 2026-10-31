@@ -1,0 +1,57 @@
+---
+const cases = [
+  {
+    no: '01',
+    label: 'CLAUDE CODE / ORGANIZATION ROLLOUT',
+    title: '導入を、効果検証と改善の仕組みまでつなぐ。',
+    metric: '+64.5%',
+    metricLabel: 'PoC対象3名のPR数変化率（単純平均）',
+    description: '個人検証からパイロット、組織展開へ段階化。OpenTelemetryとGrafanaで利用状況を可視化し、PR数、マージ時間、定性情報を組み合わせて評価しました。',
+    note: '導入前後の2期間を比較したN=3のPoC結果。個人差が大きく、全体への一般化はしない。',
+    url: 'https://speakerdeck.com/makikub/tokunshu-taketehace-renai-claude-code-zu-zhi-zhan-kai-noxiao-guo-jian-zheng-karaxue-ntakoto',
+    linkLabel: '登壇資料を見る',
+  },
+  {
+    no: '02',
+    label: 'CLINE / DELIVERY RECOVERY',
+    title: 'AIエージェントで、大規模開発の進捗を戻す。',
+    metric: '20 → 5',
+    metricLabel: '1件の機能改修 / 営業日',
+    description: '既存の大規模プロジェクトへClineを先行導入。影響範囲と実装計画をAIと詰めてから実行し、見積もり約20営業日の改修を5営業日で完了しました。',
+    note: '特定の改修1件における実績。ツール単体ではなく、計画とレビューを含む進め方の結果。',
+    url: 'https://findy-tools.io/products/cline/410/668',
+    linkLabel: '導入事例を見る',
+  },
+  {
+    no: '03',
+    label: 'AI ENABLEMENT / LEARNING LOOP',
+    title: '個人の工夫を、組織の学びに変える。',
+    metric: '30 min',
+    metricLabel: '毎週のAI相談会',
+    description: '毎週の相談会、AIニュースの定期配信、専用Slackチャンネルと投稿テンプレートを運用。成功だけでなく失敗も共有できる学習の場を作りました。',
+    note: '導入の技術面だけでなく、心理的安全性と継続的な情報整理を運用に組み込む。',
+    url: 'https://note.rehabforjapan.com/n/n0713a0fed3a5',
+    linkLabel: '取り組みの記事を見る',
+  },
+];
+---
+
+<section id="cases" class="organization-cases section-shell" aria-labelledby="organization-cases-title">
+  <div class="section-heading split-heading">
+    <div><p class="kicker">05 / ORGANIZATIONAL CASES</p><h2 id="organization-cases-title">AIを、組織で使える<br />開発の流れへ。</h2></div>
+    <p>ツールの選定だけではなく、小さな検証、展開、計測、学習までを一つの導入プロセスとして扱った公開事例です。</p>
+  </div>
+  <div class="organization-case-list">
+    {cases.map((item) => (
+      <article class="organization-case">
+        <div class="organization-case-head"><span>{item.no}</span><p class="kicker">{item.label}</p></div>
+        <div class="organization-case-main">
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+          <a class="text-link" href={item.url} target="_blank" rel="noopener noreferrer">{item.linkLabel} <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="case-metric"><strong>{item.metric}</strong><span>{item.metricLabel}</span><p>{item.note}</p></div>
+      </article>
+    ))}
+  </div>
+</section>
