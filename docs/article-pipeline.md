@@ -2,11 +2,13 @@
 
 個人開発と副業でのAIエージェント活用から、他の人が学べる実践知を記事にする。成果の羅列ではなく、課題、AIの役割、人の判断、試した手順、確認できた成果、失敗、再現条件、限界、持ち帰れる学びを扱う。既存のプロジェクト事例は維持し、継続的な実践ノートを `/notes/` に分ける。
 
-## 公開接続の確認が必要
+## 公開ソースの同期確認
 
-ユーザー指定サイトは https://mklabos.dev 。既存スキルとこのリポジトリのREADME/CLAUDE.mdは `makikub/portofolio`、Cloudflare Pages `masaki-portfolio`、`main` → `npm run build` → `dist` を示す。ただし、2026-10-31の読み取りで公開サイトの見出し・構成とGitHub mainの内容に相違があった。GitHubの最新pushは2026-07-11。Cloudflareの実設定・現在配信しているソースは未確認。
+ユーザー指定サイトは https://mklabos.dev 。2026-10-31に本人がGitHub mainを更新し、`639524e` の独自ドメイン・新しいトップ構成をこのPRへmergeした。公開サイトとトップ見出し、canonical、OG画像URLが一致し、favicon・OG画像・既存sitemapはmainとバイト単位で一致した。以前の「古いmainへ戻る」不一致は解消した。
 
-**この基盤PRをマージする前に、現在の公開サイトのソースとGit連携先を特定し、必要なら現在のソースへこの変更を移植する。古いmainをそのまま公開しない。** canonical設定は今回変更していない。既存のPages preview設定も未確認で、Draft PRの段階でプレビューが公開される可能性がある。
+README/CLAUDE.mdはCloudflare Pages `masaki-portfolio`、`main` → `npm run build` → `dist` のGit連携を示す。Cloudflare管理画面の実設定と、このPRのマージ後デプロイは未実行・未確認。PRはDraftのまま本人レビューを待つ。Pages previewがPR段階で公開される可能性も引き続き考慮する。
+
+既存の発信コンポーネントへノート一覧の導線を追加し、sitemapは既存6ルートとノート一覧・記事JSONから生成する。トップの既存コンテンツ・デザイン・公開ケースは置換しない。
 
 ## データの境界
 
@@ -52,7 +54,7 @@ config、候補、preview、実行履歴はgitignoreされた `.article-local/` 
 ```sh
 python3 -m unittest discover -s tests -v
 python3 tools/article_pipeline/pipeline.py dry-run --config .article-local/config.json
-# 公開ソースの同期・基盤PRの本人レビューとマージが完了してから:
+# サイトbuild検証・基盤PRの本人レビューとマージが完了してから:
 python3 tools/article_pipeline/pipeline.py publish --config .article-local/config.json
 ```
 

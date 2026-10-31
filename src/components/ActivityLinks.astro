@@ -19,5 +19,12 @@ const links = compact ? allLinks.slice(0, 4) : allLinks;
       <a class="activity-item" href={link.url} target="_blank" rel="noopener noreferrer"><span>0{index + 1}</span><div><p class="kicker">{link.name}</p><h3>{link.label}</h3><p>{link.description}</p></div><span class="arrow" aria-hidden="true">↗</span></a>
     ))}
   </div>
-  {compact && <div class="activity-more"><a class="text-link" href="/activity/">発信をすべて見る <span aria-hidden="true">→</span></a></div>}
+  <div class="activity-more notes-links">
+    <a class="text-link" href="/notes/">AIとつくる実践ノート <span aria-hidden="true">→</span></a>
+    {compact && <a class="text-link" href="/activity/">発信をすべて見る <span aria-hidden="true">→</span></a>}
+  </div>
 </section>
+
+<style>
+  .notes-links { display: flex; flex-wrap: wrap; gap: 1rem 2rem; }
+</style>
