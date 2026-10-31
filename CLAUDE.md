@@ -24,13 +24,18 @@ npm run preview  # ビルド後のプレビュー
 
 ### レイアウト構成
 - `src/layouts/Layout.astro` - ベースレイアウト（SEOメタタグ、OGP設定を含む）
-- `src/pages/index.astro` - projects-first構成のトップページ
+- `src/pages/index.astro` - AI駆動開発を中心に、専門領域・支援内容・組織事例・プロダクト事例を構成するトップページ
+- `src/components/Expertise.astro` - AI / Cloud / Engineering / Data の専門領域
+- `src/components/Services.astro` - 技術顧問 / AI導入支援 / AWS設計レビュー
+- `src/components/OrganizationCases.astro` - 公開済みのAI組織導入事例
 - `src/layouts/CaseLayout.astro` - プロジェクト詳細ページの共通レイアウト
 - `src/pages/projects/*.astro` - ScreenshotApp / GlassDB のケース詳細
 - `src/pages/projects.astro` - 旧一覧URLからトップページへのリダイレクト
 
 ### 静的アセット
 - `public/favicon.svg` - ファビコン
+- `public/og.png` - SNS共有カード
+- `public/sitemap.xml` - 公開ルート一覧
 
 ## コーディング規約
 
@@ -57,7 +62,8 @@ npm run preview  # ビルド後のプレビュー
 Cloudflare PagesでGitHub連携デプロイ。
 
 - Project name: `masaki-portfolio`
-- Production URL: https://masaki-portfolio-dqt.pages.dev
+- Production URL: https://mklabos.dev
+- Cloudflare Pages URL: https://masaki-portfolio-dqt.pages.dev
 - Build command: `npm run build`
 - Build output directory: `dist`
 - Deploy branch: `main`

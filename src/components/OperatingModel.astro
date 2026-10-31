@@ -1,24 +1,17 @@
 ---
 const phases = [
-  { no: '01', en: 'OBSERVE', ja: '観察する', body: '利用者、現場、技術の制約を見つける。答えを急がず、判断に必要な事実を揃えます。' },
-  { no: '02', en: 'STRUCTURE', ja: '構造化する', body: '曖昧な論点を分け、選択肢と基準を言葉にする。チームが判断できる状態を作ります。' },
-  { no: '03', en: 'OPERATE', ja: '運用する', body: '一度の成功で終わらせず、検証と改善を繰り返せる手順・道具・仕組みに落とします。' },
-];
-const roles = [
-  { en:'BUILD', ja:'作る', body:'プロダクトや業務ツールを、利用の流れと運用まで含めて実装する。' },
-  { en:'LEAD', ja:'進める', body:'背景と優先度を揃え、複数の専門性が同じ方向へ進めるようにする。' },
-  { en:'ORCHESTRATE', ja:'委ねる', body:'AIに実行を委譲しつつ、意図・評価基準・検証・安全性を人が設計する。' },
+  { no: '01', en: 'FRAME', ja: '判断条件を揃える', body: '目的、利用者、制約、受け入れ条件を明確にし、人とAIが同じゴールを見られる状態にします。' },
+  { no: '02', en: 'DELEGATE', ja: '実行を委ねる', body: '調査、実装、レビューを適切な単位に分け、AIエージェントへ委譲できるコンテキストを設計します。' },
+  { no: '03', en: 'VERIFY', ja: '実環境で確かめる', body: 'テスト、レビュー、実際の操作、リリース成果物を通して、意図した価値と安全性を人が確認します。' },
+  { no: '04', en: 'LEARN', ja: '学びを仕組みに戻す', body: '結果を文書、ルール、スキル、手順へ反映し、次の開発がより速く確かになる循環を作ります。' },
 ];
 ---
-<section class="model-block section-shell" aria-labelledby="model-title">
+<section id="approach" class="model-block section-shell" aria-labelledby="model-title">
   <div class="section-heading split-heading">
-    <div><p class="kicker">HOW I WORK</p><h2 id="model-title">判断を、再現できる流れへ。</h2></div>
-    <p>複雑な課題を、個人の勘や勢いに預けないための3つの動作です。</p>
+    <div><p class="kicker">04 / AI-DRIVEN DELIVERY</p><h2 id="model-title">AIに任せるほど、<br />人の設計を明確に。</h2></div>
+    <p>AIを単なる作業短縮に使わず、判断・委譲・検証・学習が循環する開発システムとして設計します。</p>
   </div>
   <ol class="phase-list">
     {phases.map((phase) => <li><span class="phase-no">{phase.no}</span><div><p class="phase-en">{phase.en}</p><h3>{phase.ja}</h3></div><p>{phase.body}</p></li>)}
   </ol>
-  <div class="role-grid">
-    {roles.map((role) => <article><p>{role.en}</p><h3>{role.ja}</h3><p>{role.body}</p></article>)}
-  </div>
 </section>

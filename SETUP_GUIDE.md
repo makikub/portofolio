@@ -155,7 +155,7 @@ Node.js version: 20
 ### 4. デプロイ確認
 
 ```bash
-curl -I https://masaki-portfolio-dqt.pages.dev
+curl -I https://mklabos.dev
 ```
 
 期待値は `HTTP/2 200` です。
@@ -163,16 +163,18 @@ curl -I https://masaki-portfolio-dqt.pages.dev
 HTML内のOGP/Twitter Card URLも確認します。
 
 ```bash
-curl -L https://masaki-portfolio-dqt.pages.dev
+curl -L https://mklabos.dev
 ```
 
-出力に `https://masaki-portfolio-dqt.pages.dev/` が含まれていれば、Astroの `site` 設定が反映されています。
+出力に `https://mklabos.dev/` が含まれていれば、Astroの `site` 設定が反映されています。
 
-本番URL: https://masaki-portfolio-dqt.pages.dev
+本番URL: https://mklabos.dev
 
-### カスタムドメインの設定（オプション）
+Cloudflare Pages URL: https://masaki-portfolio-dqt.pages.dev
 
-Cloudflare Pagesの Custom domains から、Cloudflare管理のカスタムドメインを設定できます。
+### カスタムドメイン
+
+Cloudflare Pagesの Custom domains に `mklabos.dev` を登録済みです。Astroの `site`、`public/robots.txt`、`public/sitemap.xml` はこのドメインを正規URLとして使用します。
 
 ## ✅ カスタマイズチェックリスト
 

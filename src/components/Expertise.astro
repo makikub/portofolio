@@ -1,0 +1,51 @@
+---
+const areas = [
+  {
+    no: '01',
+    name: 'AI Engineering',
+    title: 'AIを、開発体制に組み込む。',
+    description: '人とエージェントの責任分界、コンテキスト、評価基準、レビュー、フィードバックループまで設計します。',
+    skills: ['Claude Code', 'Devin', 'GitHub Copilot', 'Cursor', 'AI Review', 'Agent Design'],
+  },
+  {
+    no: '02',
+    name: 'Cloud',
+    title: '事業と運用から、AWSを選ぶ。',
+    description: '機能だけでなく、セキュリティ、コスト、変更容易性、運用負荷を含めてアーキテクチャを判断します。',
+    skills: ['AWS', 'ECS', 'Lambda', 'Cognito', 'Aurora', 'CloudFront', 'EventBridge'],
+  },
+  {
+    no: '03',
+    name: 'Engineering',
+    title: 'チームが判断できる状態を作る。',
+    description: '曖昧な要件と制約を構造化し、技術選定から実装、レビュー、改善まで同じ基準で前進させます。',
+    skills: ['Requirements Review', 'Architecture', 'Technology Selection', 'Code Review', 'Scrum', 'Engineering Management'],
+  },
+  {
+    no: '04',
+    name: 'Data',
+    title: 'データを、意思決定につなげる。',
+    description: '収集・変換・可視化の流れを整え、現場が同じ数字を見て次の行動を選べる状態を作ります。',
+    skills: ['BigQuery', 'dbt', 'Lightdash'],
+  },
+];
+---
+
+<section id="expertise" class="expertise-section section-shell" aria-labelledby="expertise-title">
+  <div class="section-heading split-heading">
+    <div><p class="kicker">02 / EXPERTISE</p><h2 id="expertise-title">専門領域を、<br />一つの判断へ。</h2></div>
+    <p>AI、クラウド、組織、データを別々に最適化せず、プロダクトを継続的に届けるための一つのシステムとして扱います。</p>
+  </div>
+  <div class="expertise-grid">
+    {areas.map((area) => (
+      <article class:list={['expertise-card', area.no === '01' && 'expertise-card--primary']}>
+        <header><span>{area.no}</span><p>{area.name}</p></header>
+        <h3>{area.title}</h3>
+        <p>{area.description}</p>
+        <ul aria-label={`${area.name}の技術とテーマ`}>
+          {area.skills.map((skill) => <li>{skill}</li>)}
+        </ul>
+      </article>
+    ))}
+  </div>
+</section>

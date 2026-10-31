@@ -1,5 +1,7 @@
 # Cloudflare Pages Migration Handoff
 
+> Migration status: completed. The current production URL is `https://mklabos.dev`. The `pages.dev` and Firebase URLs below are retained as historical migration context.
+
 ## Goal
 
 Migrate this Astro portfolio site from Firebase Hosting to Cloudflare Pages.

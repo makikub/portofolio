@@ -3,11 +3,11 @@ import projectsData from '../data/projects.json';
 import ProjectVisual from './ProjectVisual.astro';
 
 interface Props { heading?: string; description?: string; compact?: boolean; }
-const { heading = '作ったもの', description = '日々の小さな摩擦から始め、配布と継続的な改善まで扱っているプロダクトです。', compact = false } = Astro.props;
+const { heading = '設計から運用までを、実践で示す。', description = '公開できる個人開発を通して、課題発見、実装、検証、安全な配布、継続的な改善までの仕事を紹介します。', compact = false } = Astro.props;
 ---
-<section id="work" class:list={['work-section section-shell', compact && 'work-section--compact']} aria-labelledby="work-title">
+<section id="products" class:list={['work-section section-shell', compact && 'work-section--compact']} aria-labelledby="work-title">
   <div class="section-heading split-heading">
-    <div><p class="kicker">SELECTED WORK</p><h2 id="work-title">{heading}</h2></div>
+    <div><p class="kicker">06 / PRODUCT CASES</p><h2 id="work-title">{heading}</h2></div>
     <p>{description}</p>
   </div>
   <div class="project-list">
@@ -17,12 +17,12 @@ const { heading = '作ったもの', description = '日々の小さな摩擦か�
           <ProjectVisual project={project.title as 'ScreenshotApp' | 'GlassDB'} />
         </a>
         <div class="project-body">
-          <div class="project-index"><span>0{index + 1}</span><span>{project.role}</span></div>
+          <div class="project-index"><span>CASE 0{index + 1}</span><span>{project.role}</span></div>
           <h3><a href={`/projects/${project.slug}/`}>{project.title}</a></h3>
           <p class="project-description">{project.description}</p>
           <dl>
-            <div><dt>CONTEXT</dt><dd>{project.challenge}</dd></div>
-            <div><dt>OUTCOME</dt><dd>{project.result}</dd></div>
+            <div><dt>CHALLENGE</dt><dd>{project.challenge}</dd></div>
+            <div><dt>EVIDENCE</dt><dd>{project.result}</dd></div>
           </dl>
           <div class="project-footer">
             <ul aria-label="使用技術">{project.technologies.slice(0, 5).map((tech) => <li>{tech}</li>)}</ul>

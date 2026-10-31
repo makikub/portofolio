@@ -1,14 +1,14 @@
 # ポートフォリオサイト
 
-Astro + Tailwind CSSで構築した、個人開発の成果と仕事の進め方を紹介するポートフォリオサイトです。
-作ったものを最初に見せる構成と、paper / graphite / cobaltを基調にしたエディトリアルなデザインを採用しています。
+Astro + Tailwind CSSで構築した、AI駆動開発、AWS設計、エンジニアリングマネジメントの専門性と実践を紹介するポートフォリオサイトです。
+技術顧問の設計ブリーフを思わせる情報設計と、paper / graphite / cobaltを基調にしたエディトリアルなデザインを採用しています。
 
 ## 🚀 特徴
 
 - ⚡ **超高速** - Astroの静的サイト生成により、最高のパフォーマンス
-- 🎨 **エディトリアルデザイン** - プロダクトと判断の流れを読みやすく構成
+- 🎨 **エディトリアルデザイン** - 専門領域、支援内容、実践を読みやすく構成
 - 📱 **完全レスポンシブ** - モバイル、タブレット、デスクトップに対応
-- 🔍 **SEO最適化** - メタタグ、OGP、構造化データ対応
+- 🔍 **SEO最適化** - メタタグ、OGP、SNS共有カード、サイトマップ対応
 - 🎯 **読みやすさ重視** - タイポグラフィとスペーシングを重視したデザイン
 - 💰 **低コスト運用** - Cloudflare Pagesの無料枠で運用可能
 
@@ -21,10 +21,13 @@ Astro + Tailwind CSSで構築した、個人開発の成果と仕事の進め方
 
 ## 📋 セクション
 
-- **作ったもの** - ScreenshotApp / GlassDBとケース詳細
-- **仕事の進め方** - Observe → Structure → Operateと仕事の原則
-- **発信活動** - Zenn / Xへの公開導線
-- **問い合わせ** - 公開プロフィールへの導線
+- **About / Expertise** - AI、クラウド、組織、データを横断する専門性
+- **Services** - 技術顧問、AI導入支援、AWS設計レビュー
+- **AI-Driven Delivery** - Frame → Delegate → Verify → Learn
+- **Organizational Cases** - Claude Code / Cline導入と組織浸透の公開事例
+- **Product Cases** - ScreenshotApp / GlassDBの実装・検証・配布
+- **Speaking & Writing** - Speaker Deck、Findy Tools、note、Zenn、X
+- **Philosophy / Contact** - AI協調開発への考え方と公開窓口
 
 ## 🛠️ 技術スタック
 
@@ -39,11 +42,16 @@ Astro + Tailwind CSSで構築した、個人開発の成果と仕事の進め方
 portofolio/
 ├── public/                    # 静的ファイル
 │   ├── robots.txt            # SEO設定
+│   ├── sitemap.xml           # 公開ルート一覧
+│   ├── og.png                # SNS共有カード
 │   └── favicon.svg           # ファビコン
 ├── src/
 │   ├── components/           # Astroコンポーネント
 │   │   ├── Header.astro      # ヘッダー・ナビゲーション
 │   │   ├── HomeIntro.astro   # トップの自己紹介
+│   │   ├── Expertise.astro   # 専門領域
+│   │   ├── Services.astro    # 支援内容
+│   │   ├── OrganizationCases.astro # 組織導入事例
 │   │   ├── Projects.astro    # プロジェクト一覧
 │   │   ├── ProjectVisual.astro # プロダクト画面表現
 │   │   ├── OperatingModel.astro # 仕事の進め方
@@ -105,6 +113,7 @@ npm run preview
 
 - `src/data/projects.json` - プロジェクト情報
 - `src/data/social.json` - 公開プロフィールリンク
+- `src/components/*.astro` - 専門領域、支援内容、公開事例、発信
 - `src/pages/profile.astro` - 経歴・仕事の原則
 
 ### 2. デザインの変更
@@ -139,12 +148,14 @@ Node.js version: 20
 GitHubの `main` ブランチにpushすると、Cloudflare Pagesが自動でビルド・デプロイします。
 
 ```bash
-curl -I https://masaki-portfolio-dqt.pages.dev
+curl -I https://mklabos.dev
 ```
 
 期待値は `HTTP/2 200` です。
 
-本番URL: https://masaki-portfolio-dqt.pages.dev
+本番URL: https://mklabos.dev
+
+Cloudflare Pages URL: https://masaki-portfolio-dqt.pages.dev
 
 ### 4. 手動デプロイ
 
@@ -158,12 +169,12 @@ npx wrangler pages deploy dist --project-name masaki-portfolio --branch main
 デプロイ後、Cloudflare が返すプレビューURLと本番URLの両方で最新内容を確認します。
 
 ```bash
-curl -L https://masaki-portfolio-dqt.pages.dev
+curl -L https://mklabos.dev
 ```
 
-### カスタムドメインの設定（オプション）
+### 5. カスタムドメイン
 
-Cloudflare Pagesの Custom domains から、Cloudflare管理のカスタムドメインを設定できます。
+Cloudflare Pagesの Custom domains に `mklabos.dev` を登録し、同じCloudflareアカウントのDNSからPagesへ接続しています。Astroのcanonical、OGP、robots、サイトマップも `https://mklabos.dev` を正規URLとして生成します。
 
 ## 📊 パフォーマンス最適化
 

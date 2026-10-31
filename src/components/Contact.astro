@@ -1,9 +1,14 @@
 ---
 import socialData from '../data/social.json';
-const links = socialData.links.filter((link) => ['GitHub', 'Twitter', 'Zenn'].includes(link.name));
+interface Props { standalone?: boolean; }
+const { standalone = false } = Astro.props;
+const links = [
+  ...socialData.links.filter((link) => ['GitHub', 'Twitter'].includes(link.name)),
+  { name: 'Wantedly', url: 'https://www.wantedly.com/id/masaki_kubota_i' },
+];
 ---
-<section class="contact-section section-shell" aria-labelledby="contact-title">
-  <div class="contact-lead"><p class="kicker">CONTACT</p><h1 id="contact-title">まずは、公開している場所から。</h1><p>現在は公開プロフィールを連絡・活動確認の窓口にしています。制作物や技術記事をご覧いただき、各サービスからお声がけください。</p></div>
+<section id="contact" class="contact-section section-shell" aria-labelledby="contact-title">
+  <div class="contact-lead"><p class="kicker">09 / CONTACT</p>{standalone ? <h1 id="contact-title">開発の次の一手を、<br />一緒に整理します。</h1> : <h2 id="contact-title">開発の次の一手を、<br />一緒に整理します。</h2>}<p>技術顧問、AWS設計レビュー、AI導入支援について、課題がまだ曖昧な段階からご相談いただけます。現在は公開プロフィールを窓口にしています。</p><ul><li>Technical Advisory</li><li>AI Enablement</li><li>AWS Architecture Review</li></ul></div>
   <div class="contact-links">
     {links.map((link, index) => <a href={link.url} target="_blank" rel="noopener noreferrer"><span>0{index + 1}</span><strong>{link.name === 'Twitter' ? 'X' : link.name}</strong><span aria-hidden="true">↗</span></a>)}
   </div>

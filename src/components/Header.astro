@@ -1,16 +1,18 @@
 ---
 const navItems = [
-  { name: '作ったもの', href: '/' }, { name: '経歴・できること', href: '/profile/' }, { name: '発信活動', href: '/activity/' }, { name: '問い合わせ', href: '/contact/' },
+  { name: '専門領域', href: '/#expertise' },
+  { name: '支援内容', href: '/#services' },
+  { name: '実践例', href: '/#cases' },
+  { name: '発信', href: '/#writing' },
+  { name: '問い合わせ', href: '/#contact' },
 ];
-const path = Astro.url.pathname;
-const active = (href:string) => href === '/' ? path === '/' || path.startsWith('/projects/') : path.startsWith(href);
 ---
 <header class="site-header">
   <nav class="header-inner" aria-label="メインナビゲーション">
-    <a href="/" class="site-name"><span>MK</span><span>masaki.k</span></a>
-    <button class="menu-button" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span class="sr-only">メニューを開く</span></button>
+    <a href="/" class="site-name" aria-label="masaki.k ホーム"><span>MK</span><span>masaki.k <small>EM / AI ENGINEERING</small></span></a>
+    <button type="button" class="menu-button" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span class="sr-only">メニューを開く</span></button>
     <ul id="site-nav">
-      {navItems.map((item) => <li><a href={item.href} aria-current={active(item.href) ? 'page' : undefined}>{item.name}</a></li>)}
+      {navItems.map((item) => <li><a href={item.href}>{item.name}</a></li>)}
     </ul>
   </nav>
 </header>
@@ -22,6 +24,7 @@ const active = (href:string) => href === '/' ? path === '/' || path.startsWith('
   const setMenuOpen = (open: boolean) => {
     button?.setAttribute('aria-expanded', String(open));
     nav?.classList.toggle('is-open', open);
+    document.body.classList.toggle('menu-open', open);
     if (menuLabel) menuLabel.textContent = open ? 'メニューを閉じる' : 'メニューを開く';
   };
 
@@ -31,5 +34,32 @@ const active = (href:string) => href === '/' ? path === '/' || path.startsWith('
 
   nav?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => setMenuOpen(false));
+  });
+
+  window.addEventListener('keydown', (event) => {
+    const isOpen = button?.getAttribute('aria-expanded') === 'true';
+    if (!isOpen) return;
+
+    if (event.key === 'Escape') {
+      setMenuOpen(false);
+      button?.focus();
+      return;
+    }
+
+    if (event.key === 'Tab' && button && nav) {
+      const links = Array.from(nav.querySelectorAll<HTMLAnchorElement>('a'));
+      const lastLink = links.at(-1);
+      if (event.shiftKey && document.activeElement === button && lastLink) {
+        event.preventDefault();
+        lastLink.focus();
+      } else if (!event.shiftKey && document.activeElement === lastLink) {
+        event.preventDefault();
+        button.focus();
+      }
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 800) setMenuOpen(false);
   });
 </script>
