@@ -8,5 +8,7 @@
   "seed_dir": ".article-local/seeds",
   "state_dir": ".article-local/state",
   "denied_terms": [],
-  "local_sources": []
+  "local_sources": [],
+  "device_id": "mac-mini",
+  "worklog_projects": []
 }
