@@ -29,7 +29,7 @@
 
 ## 公開接続の現状
 
-2026-10-31の既存Wrangler認証による読み取りで、Pages `masaki-portfolio` の `Git Provider` は `No` と確認した。PR #1はmainへマージ済みだが、独自ドメインとPages URLの `/notes/` はトップページへフォールバックしており未反映。既存READMEのGit連携記述は実設定と一致しない。現在はマージだけで公開される状態ではないため、自動デプロイ経路は別途承認して整備する。今回、手動deploy・設定変更・credential追加は行っていない。
+Pages `masaki-portfolio` はDirect Upload方式。公開経路は `.github/workflows/pages-deployment.yaml` のGitHub Actionsが担当する。PRでは検証のみ、mainへのpushではテスト・build後に既存projectへ配備する。必要なActions Secretsと公開確認手順はREADMEを参照。週次記事処理自体はマージ・deployを行わない。
 
 ## 週1回の公式automation用手順
 
