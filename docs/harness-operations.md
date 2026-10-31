@@ -27,6 +27,10 @@
 4. `harness.py record --config <private-config> --cwd <task-cwd> --tool <tool> --file -` にstdinで渡す。provenanceはconfigから注入される。`visibility` はprivate以外を拒否する。
 5. 保存結果を確認し、失敗したら本来の成果物を保持して保存失敗を報告する。自動で承認や権限を拡大しない。
 
+## 公開接続の現状
+
+2026-10-31の既存Wrangler認証による読み取りで、Pages `masaki-portfolio` の `Git Provider` は `No` と確認した。PR #1はmainへマージ済みだが、独自ドメインとPages URLの `/notes/` はトップページへフォールバックしており未反映。既存READMEのGit連携記述は実設定と一致しない。現在はマージだけで公開される状態ではないため、自動デプロイ経路は別途承認して整備する。今回、手動deploy・設定変更・credential追加は行っていない。
+
 ## 週1回の公式automation用手順
 
 cron/launchdは登録しない。実行環境はそのcheckoutへアクセスできるMacとし、cwdをcheckout rootに固定する。

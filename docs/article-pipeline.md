@@ -6,7 +6,7 @@
 
 ユーザー指定サイトは https://mklabos.dev 。2026-10-31に本人がGitHub mainを更新し、`639524e` の独自ドメイン・新しいトップ構成をこのPRへmergeした。公開サイトとトップ見出し、canonical、OG画像URLが一致し、favicon・OG画像・既存sitemapはmainとバイト単位で一致した。以前の「古いmainへ戻る」不一致は解消した。
 
-README/CLAUDE.mdはCloudflare Pages `masaki-portfolio`、`main` → `npm run build` → `dist` のGit連携を示す。Cloudflare管理画面の実設定と、このPRのマージ後デプロイは未実行・未確認。ローカルの型・build・PC/モバイル検証は成功した（[検証記録](article-pipeline-verification.md)）。PRはDraftのまま本人レビューを待つ。Pages previewがPR段階で公開される可能性も引き続き考慮する。
+README/CLAUDE.mdはCloudflare Pages `masaki-portfolio`、`main` → `npm run build` → `dist` のGit連携を示す。その後の既存Wranglerによる読み取りではPagesのGit ProviderはNoで、mainへのマージ後もnotesは未反映だった。現状はマージだけで公開される接続がなく、自動デプロイ経路の整備は別途承認が必要。ローカルの型・build・PC/モバイル検証は成功した（[検証記録](article-pipeline-verification.md)）。PRはDraftのまま本人レビューを待つ。Pages previewがPR段階で公開される可能性も引き続き考慮する。
 
 既存の発信コンポーネントへノート一覧の導線を追加し、sitemapは既存6ルートとノート一覧・記事JSONから生成する。トップの既存コンテンツ・デザイン・公開ケースは置換しない。
 

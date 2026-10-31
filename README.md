@@ -122,7 +122,7 @@ npm run preview
 
 ## Cloudflare Pagesへのデプロイ
 
-Cloudflare PagesはGitHub連携で自動デプロイします。
+**現状の注意（2026-10-31確認）:** Pagesの実設定は `Git Provider: No` です。以下のGitHub連携による自動デプロイは目標の手順で、現在の接続状態ではありません。マージだけでは公開されないため、自動デプロイ経路の整備が別途必要です。
 
 ### 1. ローカルビルド確認
 
