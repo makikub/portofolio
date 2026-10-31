@@ -37,3 +37,6 @@ firebase-debug.log
 # Private intake, candidate metadata, previews and execution logs
 .article-local/
 __pycache__/
+
+# Local Cloudflare CLI state
+.wrangler/
