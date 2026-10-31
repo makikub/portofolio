@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """Read exact allowlisted project notes into private candidates; no recursive scans."""
 import argparse
 import datetime as dt

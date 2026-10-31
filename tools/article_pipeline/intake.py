@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """Import one explicitly selected private reflection; never scan conversations."""
 import argparse
 import fcntl

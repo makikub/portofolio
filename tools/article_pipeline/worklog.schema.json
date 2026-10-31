@@ -1,0 +1,174 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{1,100}$"
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "device_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{1,100}$"
+        },
+        "source_tool": {
+          "enum": [
+            "codex",
+            "claude-code",
+            "grokbot",
+            "manual"
+          ]
+        },
+        "project_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{1,100}$"
+        }
+      },
+      "required": [
+        "device_id",
+        "source_tool",
+        "project_id"
+      ],
+      "additionalProperties": false
+    },
+    "goal": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "roles": {
+      "type": "object",
+      "properties": {
+        "ai": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 4000
+          }
+        },
+        "human": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 4000
+          }
+        }
+      },
+      "required": [
+        "ai",
+        "human"
+      ],
+      "additionalProperties": false
+    },
+    "attempts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "maxLength": 4000
+          },
+          "outcome": {
+            "type": "string",
+            "maxLength": 4000
+          }
+        },
+        "required": [
+          "action",
+          "outcome"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "completed",
+            "partial",
+            "failed",
+            "unknown"
+          ]
+        },
+        "summary": {
+          "type": "string",
+          "maxLength": 4000
+        }
+      },
+      "required": [
+        "status",
+        "summary"
+      ],
+      "additionalProperties": false
+    },
+    "failures": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 4000
+      }
+    },
+    "lessons": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 4000
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "enum": [
+              "pr",
+              "commit",
+              "test",
+              "artifact",
+              "note"
+            ]
+          },
+          "ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000
+          },
+          "verification": {
+            "enum": [
+              "observed",
+              "reported",
+              "not_run"
+            ]
+          }
+        },
+        "required": [
+          "kind",
+          "ref",
+          "verification"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "visibility": {
+      "enum": [
+        "private",
+        "consider_for_article"
+      ],
+      "default": "private"
+    }
+  },
+  "required": [
+    "provenance",
+    "goal"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

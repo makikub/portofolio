@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """Local, explicit-release article pipeline. Python standard library only."""
 import argparse
 import datetime as dt
