@@ -1,0 +1,73 @@
+{
+  "id": "replace-with-stable-id",
+  "date": "2026-10-31",
+  "title": "",
+  "summary": "",
+  "public_release": false,
+  "evidence": [],
+  "sections": {
+    "problem": [
+      {
+        "text": "",
+        "kind": "inference",
+        "evidence": []
+      }
+    ],
+    "agent_role": [
+      {
+        "text": "",
+        "kind": "inference",
+        "evidence": []
+      }
+    ],
+    "human_decisions": [
+      {
+        "text": "",
+        "kind": "inference",
+        "evidence": []
+      }
+    ],
+    "steps": [
+      {
+        "text": "",
+        "kind": "inference",
+        "evidence": []
+      }
+    ],
+    "results": [
+      {
+        "text": "",
+        "kind": "observed",
+        "evidence": []
+      }
+    ],
+    "failures": [
+      {
+        "text": "",
+        "kind": "inference",
+        "evidence": []
+      }
+    ],
+    "reproduction": [
+      {
+        "text": "",
+        "kind": "inference",
+        "evidence": []
+      }
+    ],
+    "limitations": [
+      {
+        "text": "",
+        "kind": "inference",
+        "evidence": []
+      }
+    ],
+    "lesson": [
+      {
+        "text": "",
+        "kind": "inference",
+        "evidence": []
+      }
+    ]
+  }
+}

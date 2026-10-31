@@ -1,0 +1,28 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+type Claim = {text: string; kind: 'observed' | 'inference' | 'planned'; evidence: string[]};
+type Article = {id: string; title: string; summary: string; date: string; sections: Record<string, Claim[]>; evidence: {url: string; note: string}[]};
+export function getStaticPaths() {
+  const modules = import.meta.glob('../../data/articles/*.json', { eager: true, import: 'default' });
+  return (Object.values(modules) as Article[]).map(article => ({params: {slug: article.id}, props: {article}}));
+}
+interface Props {article: Article;}
+const {article} = Astro.props;
+const headings: Record<string, string> = {problem: '取り組んだ課題', agent_role: 'AIエージェントの役割', human_decisions: '人が判断したこと', steps: '試した手順', results: '確認できた成果', failures: '失敗と試行錯誤', reproduction: '再現するための条件', limitations: '限界と未確認事項', lesson: '持ち帰れる学び'};
+const labels = {observed: '確認した事実', inference: '考察', planned: '今後の計画'};
+---
+<Layout title={article.title} description={article.summary}>
+  <Header />
+  <main class="note">
+    <a href="/notes/">実践ノート一覧</a>
+    <article>
+      <header><p><time>{article.date}</time></p><h1>{article.title}</h1><p>{article.summary}</p></header>
+      {Object.entries(headings).map(([key, heading]) => <section><h2>{heading}</h2>{article.sections[key].map(claim => <div><small>{labels[claim.kind]}</small><p>{claim.text}</p>{claim.evidence.map(url => <a class="evidence" href={url} rel="noopener noreferrer">根拠 {article.evidence.findIndex(e => e.url === url) + 1}</a>)}</div>)}</section>)}
+      <section><h2>根拠資料</h2><ol>{article.evidence.map(e => <li><a href={e.url} rel="noopener noreferrer">{e.note}</a></li>)}</ol></section>
+    </article>
+  </main>
+  <Footer />
+</Layout>
+<style>.note {max-width: 48rem; margin: 4rem auto; padding: 0 1.5rem; overflow-wrap: anywhere;} h1 {font-size: clamp(1.8rem, 5vw, 2.6rem);} h2 {font-size: 1.5rem; margin: 2.5rem 0 1rem;} p {white-space: pre-wrap; line-height: 1.9; margin: 1rem 0;} small {opacity: .75;} .evidence {display: inline-block; margin-right: 1rem;} a {text-decoration: underline; text-underline-offset: .2em;} ol {list-style: decimal; padding-left: 1.5rem;} li {margin: .8rem 0;}</style>

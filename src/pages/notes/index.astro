@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+const modules = import.meta.glob('../../data/articles/*.json', { eager: true, import: 'default' });
+const articles = Object.values(modules) as {id: string; title: string; summary: string; date: string}[];
+articles.sort((a,b) => b.date.localeCompare(a.date));
+---
+<Layout title="AIとつくる実践ノート" description="個人開発と副業でのAIエージェント活用から、手順・判断・失敗・再現条件を共有します。">
+  <Header />
+  <main class="notes">
+    <h1>AIとつくる実践ノート</h1>
+    <p>試した手順、人が判断したこと、確かめられた成果と限界をまとめます。</p>
+    {articles.length === 0 && <p>記事を準備しています。</p>}
+    {articles.map(article => <article><time>{article.date}</time><h2><a href={`/notes/${article.id}/`}>{article.title}</a></h2><p>{article.summary}</p></article>)}
+  </main>
+  <Footer />
+</Layout>
+<style>.notes {max-width: 48rem; margin: 4rem auto; padding: 0 1.5rem;} h1 {font-size: 2rem;} article {margin: 2rem 0; padding-top: 1rem; border-top: 1px solid var(--line);} a {text-decoration: underline; text-underline-offset: .2em;} h2 {font-size: 1.4rem;} p {line-height: 1.9; margin: 1rem 0;}</style>

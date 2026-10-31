@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "provenance": {
+    "device_id": "mac-mini",
+    "source_tool": "codex",
+    "project_id": "personal-project"
+  },
+  "goal": "今回達成しようとしたことを一文で",
+  "roles": {"ai": [], "human": []},
+  "attempts": [],
+  "result": {"status": "unknown", "summary": "未記入"},
+  "failures": [],
+  "evidence": [],
+  "lessons": [],
+  "visibility": "private"
+}
