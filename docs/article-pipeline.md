@@ -139,3 +139,15 @@ python3 tools/article_pipeline/collect_local.py --config .article-local/config.j
 ## 推奨する入口: 作業終了ログ
 
 日々の入口は [ハーネス作業ログ](harness-worklog.md)。作業エージェントが短いログを終了時に保存し、私的記事候補へ変換する。本人が毎回記事用の9項目を手入力する必要はない。既存メモのallowlist収集は過去の記録を取り込む補助手段として使用する。
+
+## 記事ありdry-runのレビュー
+
+`dry-run` は公開許可済みseedを検査し、`preview.json`、レビュー用 `preview.md`、実投稿と同じ生成関数を使う `pr-payload.json` をローカルstateへ出力する。PR payloadは1回1記事分（repo/base/head/draft/title/body/記事JSON）。非公開provenanceは含めない。Markdownは本文をエスケープし、任意HTMLやMarkdownリンクを有効化しない。サイト掲載形式は引き続きJSONで、MarkdownはPR本文とレビュー用に使う。
+
+```sh
+python3 tools/article_pipeline/pipeline.py dry-run --verify-remote --config .article-local/config.json
+```
+
+`--verify-remote` はGitHub根拠repoのpublic状態とURL実在を読み取り検証する。push・PR作成はしない。フラグなしの出力は `remote_evidence_verified: false` であり、根拠の公開可否は未確認。フラグありでもリモートの過去PR照合は未実施と表示する。公開処理は投稿時に再検査・重複照合する。dry-runの合格だけで公開を承認しない。
+
+失敗・空実行の前に古いpreview/payloadを無効化する。seed_dirとstate_dirは別にする。秘密値検査は代表的な形式と私的パス・URLを検査するが、あらゆる機密や主張の真偽を判定できるものではない。

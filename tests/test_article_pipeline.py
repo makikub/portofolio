@@ -58,13 +58,13 @@ class Gates(unittest.TestCase):
 
     def test_empty_does_not_call_network(self):
         with tempfile.TemporaryDirectory() as tmp, patch.object(p, 'gh', side_effect=AssertionError('network')):
-            self.config['seed_dir']=tmp
+            self.config['seed_dir']=str(Path(tmp)/'seeds')
             self.assertEqual(p.run(self.config, Path(tmp), True)['status'], 'skipped')
 
     def test_dry_run_no_network_or_git(self):
         with tempfile.TemporaryDirectory() as tmp, patch.object(p, 'command', side_effect=AssertionError('command')):
-            self.config['seed_dir']=tmp
-            p.write(Path(tmp)/'seed.json', seed())
+            self.config['seed_dir']=str(Path(tmp)/'seeds')
+            p.write(Path(tmp)/'seeds/seed.json', seed())
             result=p.run(self.config, Path(tmp))
             self.assertEqual(result['count'], 1)
             self.assertFalse(result['remote_evidence_verified'])

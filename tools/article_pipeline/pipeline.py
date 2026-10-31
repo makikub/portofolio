@@ -5,6 +5,7 @@ import argparse
 import datetime as dt
 import fcntl
 import hashlib
+import html
 import json
 from pathlib import Path
 import re
@@ -15,7 +16,8 @@ import tempfile
 TARGET = 'makikub/portofolio'
 SECTIONS = ('problem', 'agent_role', 'human_decisions', 'steps', 'results', 'failures', 'reproduction', 'limitations', 'lesson')
 BLOCK = re.compile(r'(?i)(/Users/|/home/|file://|localhost|127\.0\.0\.1|slack\.com|docs\.google\.com|BEGIN .*PRIVATE KEY|(?:gh[pousr]_|github_pat_|sk-)[A-Za-z0-9_-]{10,}|(?:password|token|secret|api[_-]?key)\s*[:=]|[\w.+-]+@[\w.-]+\.[a-z]{2,})')
-LINK = re.compile(r'https?://[^\s<>"\)]+')
+EXTRA_SENSITIVE = re.compile(r'(?i)(?:/tmp/|/private/|/var/|/etc/|/Volumes/|/opt/|/mnt/|/root/|/Library/|/Applications/|~/|[A-Z]:\\|(?:AKIA|ASIA)[A-Z0-9]{16}|xox[baprs]-[A-Za-z0-9-]{10,}|glpat-[A-Za-z0-9_-]{10,}|Bearer\s+[A-Za-z0-9._-]{10,}|eyJ[A-Za-z0-9_-]+\.eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+|(?:ssh|s3|ftp)://)')
+LINK = re.compile(r'https?://[^\s<>"\)]+', re.IGNORECASE)
 EVIDENCE = re.compile(r'https://github\.com/(makikub/[A-Za-z0-9_.-]+)/(commit/[0-9a-f]{40}|pull/[1-9][0-9]*|issues/[1-9][0-9]*)\Z')
 
 class GateError(Exception):
@@ -74,7 +76,7 @@ def validate(seed, config):
             if name == 'results':
                 require(claim['kind'] == 'observed', 'results_must_be_observed')
     raw = json.dumps(seed, ensure_ascii=False)
-    require(not BLOCK.search(raw), 'sensitive_content')
+    require(not BLOCK.search(raw) and not EXTRA_SENSITIVE.search(raw), 'sensitive_content')
     require(not any(term.casefold() in raw.casefold() for term in config.get('denied_terms', []) if term), 'excluded_content')
     require(set(LINK.findall(raw)) <= set(urls), 'unapproved_url')
     return seed
@@ -129,7 +131,36 @@ def collect(config, state):
     write(state / 'candidates.json', candidates)
     return {'status': 'collected', 'count': len(candidates)}
 
-def run(config, state, publish=False):
+def markdown_text(value):
+    return re.sub(r'([\\`*_{}\[\]()#+.!|>-])', r'\\\1', html.escape(value, quote=False))
+
+def render_markdown(seed):
+    headings = dict(zip(SECTIONS, ('課題', 'AIの役割', '人の判断', '手順', '確認できた成果', '失敗', '再現条件', '限界', '学び')))
+    labels = {'observed': '確認した事実', 'inference': '考察', 'planned': '計画'}
+    lines = ['# ' + markdown_text(seed['title']), '', markdown_text(seed['summary']), '']
+    for section in SECTIONS:
+        lines.extend(['## ' + headings[section], ''])
+        for claim in seed['sections'][section]:
+            lines.extend(['**' + labels[claim['kind']] + '**', '', markdown_text(claim['text']), ''])
+            for url in claim['evidence']:
+                lines.extend(['[根拠](' + url + ')', ''])
+    lines.extend(['## 根拠資料', ''])
+    lines.extend('- [' + markdown_text(e['note']) + '](' + e['url'] + ')' for e in seed['evidence'])
+    return '\n'.join(lines) + '\n'
+
+def pr_payload(seed):
+    body = '\n'.join(evidence_marker(e['url']) for e in seed['evidence'])
+    body += '\n\n公開許可済み記事種から生成。事実と根拠、公開可否、再現条件、限界を本人がレビューしてください。Draftの本文と差分も公開され得ます。自動承認・マージは行いません。\n\n'
+    body += render_markdown(seed)
+    return {'repository': TARGET, 'base': 'main', 'head': 'articles/' + seed['id'], 'draft': True, 'title': '実践ノート: ' + seed['title'], 'body': body, 'article_path': 'src/data/articles/' + seed['id'] + '.json', 'article': seed}
+
+def run(config, state, publish=False, verify_remote=False):
+    require(Path(config['seed_dir']).expanduser().resolve() != state.resolve(), 'seed_and_state_must_be_separate')
+    # Invalidate prior output before any validation failure or empty run.
+    state.mkdir(parents=True, exist_ok=True)
+    write(state / 'preview.json', [])
+    write(state / 'pr-payload.json', [])
+    (state / 'preview.md').write_text('')
     require(config['target_repo'] == TARGET and config['base'] == 'main', 'target_mismatch')
     seeds = [validate(read(p), config) for p in sorted(Path(config['seed_dir']).expanduser().glob('*.json'))]
     # Empty run needs neither network nor checkout.
@@ -138,8 +169,12 @@ def run(config, state, publish=False):
     require(len({s['id'] for s in seeds}) == len(seeds), 'duplicate_seed_id')
     if not publish:
         chosen = select(seeds, articles_at(Path(__file__).resolve().parents[2]))
+        if verify_remote:
+            verify_evidence(chosen)
         write(state / 'preview.json', chosen)
-        return {'status': 'dry_run', 'count': len(chosen), 'remote_evidence_verified': False}
+        write(state / 'pr-payload.json', [pr_payload(seed) for seed in chosen[:1]])
+        (state / 'preview.md').write_text(render_markdown(chosen[0]) if chosen else '')
+        return {'status': 'dry_run', 'count': len(chosen), 'planned_pr_count': min(len(chosen), 1), 'remote_evidence_verified': verify_remote, 'remote_pr_dedup_checked': False}
     require(gh('user')['login'] == 'makikub', 'wrong_github_account')
     meta = gh('repos/' + TARGET)
     require(meta['default_branch'] == 'main', 'unexpected_default_branch')
@@ -177,14 +212,16 @@ def run(config, state, publish=False):
             command('git', '-c', 'user.name=makikub', '-c', 'user.email=makikub@users.noreply.github.com', 'commit', '-m', 'docs: add reviewed learning seed ' + seed['id'], cwd=tmp)
             command('git', 'push', 'origin', branch, cwd=tmp)
         body = Path(tmp) / 'article-pr-body.md'
-        body.write_text('\n'.join(evidence_marker(e['url']) for e in seed['evidence']) + '\n\n' + '公開可能として保存された記事種から生成。\n\n確認項目:\n- 読者が再現できる学び\n- 事実と根拠の対応、推測・計画の区別\n- 非公開情報が含まれないこと\n- 失敗、再現条件、限界\n\nDraft PRの本文・差分とPages previewは公開され得ます。本人がレビューしてmainへマージすると既存Pages連携で公開します。自動承認・自動マージはしません。\n')
-        url = command('gh', 'pr', 'create', '--repo', TARGET, '--base', 'main', '--head', branch, '--draft', '--title', '実践ノート: ' + seed['title'], '--body-file', str(body))
+        payload = pr_payload(seed)
+        body.write_text(payload['body'])
+        url = command('gh', 'pr', 'create', '--repo', payload['repository'], '--base', payload['base'], '--head', payload['head'], '--draft', '--title', payload['title'], '--body-file', str(body))
         return {'status': 'draft_pr_created', 'pr': url}
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('action', choices=['collect', 'dry-run', 'publish', 'check'])
     parser.add_argument('--config', required=True)
+    parser.add_argument('--verify-remote', action='store_true', help='Read-only public evidence verification for dry-run')
     args = parser.parse_args()
     config = read(args.config)
     state = Path(config['state_dir']).expanduser()
@@ -205,7 +242,7 @@ def main():
                 require(len(select(items, [])) == len(items), 'duplicate_published_evidence')
                 result = {'status': 'checked', 'count': len(items)}
             else:
-                result = run(config, state, args.action == 'publish')
+                result = run(config, state, args.action == 'publish', args.verify_remote)
         except (GateError, ValueError, KeyError, TypeError, OSError):
             result = {'status': 'failed', 'reason': 'validation_or_external_command_failed', 'action': args.action}
         with (state / 'runs.jsonl').open('a') as log:

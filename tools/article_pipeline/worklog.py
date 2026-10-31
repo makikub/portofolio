@@ -22,7 +22,7 @@ def normalize(data):
     require(isinstance(data,dict),'object_required')
     allowed={'schema_version','event_id','provenance','goal','roles','attempts','result','failures','evidence','lessons','visibility'}
     require(set(data)<=allowed,'unknown_fields')
-    require(data.get('schema_version',1)==1,'schema_version')
+    require(type(data.get('schema_version',1)) is int and data.get('schema_version',1)==1,'schema_version')
     provenance=data['provenance']
     require(set(provenance)=={'device_id','source_tool','project_id'},'provenance_fields')
     require(provenance['source_tool'] in ('codex','claude-code','grokbot','manual'),'source_tool')

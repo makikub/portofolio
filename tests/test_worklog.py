@@ -58,3 +58,7 @@ class Worklog(unittest.TestCase):
         self.assertEqual(result.returncode,0,result.stdout+result.stderr)
         self.assertEqual(json.loads(result.stdout)['status'],'private_log_saved')
         self.assertFalse((self.root/'public-seeds').exists())
+
+    def test_schema_version_rejects_boolean(self):
+        self.data['schema_version']=True
+        with self.assertRaises(w.GateError): w.record(self.data,self.config)
