@@ -13,7 +13,7 @@ python3 -m unittest discover -s tests -q
 ASTRO_TELEMETRY_DISABLED=1 npm run build
 ```
 
-- Python: 45テスト成功。
+- Python: 46テスト成功。
 - Astro check: 28ファイル、エラー0・警告0・ヒント0。
 - 通常build: 8ページ成功。公開許可済み記事は0件で、ノート一覧は準備中を表示。
 - 公開情報だけの合成fixture build: 9ページ成功。記事詳細と一覧・sitemapへの追加を確認。
@@ -43,3 +43,7 @@ PCとモバイルのスクリーンショットも目視した。320pxで既存S
 - 本番deploy、Cloudflare管理画面の設定確認、本人マージ後の公開確認は未実施。
 - ハーネスへの永続組み込み、MacBook Proとの私的同期、Grokbot側の呼出、定期automationは未接続。
 - 根拠URLの実在や形式検査は、主張の正しさ・公開可否の最終判断を代替しない。
+
+## PRレビュー対応
+
+GitHubの収集APIへ渡すsinceのUTCオフセットをurlencodeでエンコードし、`+00:00` がクエリ解析時に空白へ変わる問題を修正。7日前の日時がAPI側で元通りに復元される回帰テストを追加した。

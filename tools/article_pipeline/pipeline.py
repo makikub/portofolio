@@ -12,6 +12,7 @@ import re
 import subprocess
 import sys
 import tempfile
+from urllib.parse import urlencode
 
 TARGET = 'makikub/portofolio'
 SECTIONS = ('problem', 'agent_role', 'human_decisions', 'steps', 'results', 'failures', 'reproduction', 'limitations', 'lesson')
@@ -124,7 +125,8 @@ def collect(config, state):
         require(not any(term.casefold() in repo.casefold() for term in config.get('denied_terms', []) if term), 'excluded_source')
         meta = gh('repos/' + repo)
         require(meta['visibility'] == 'public', 'collection_not_public')
-        commits = gh('repos/' + repo + '/commits?per_page=100&since=' + since)
+        query = urlencode({'per_page': 100, 'since': since})
+        commits = gh('repos/' + repo + '/commits?' + query)
         require(len(commits) < 100, 'collection_window_too_large')
         for commit in commits:
             candidates.append({'id': repo + ':' + commit['sha'], 'url': commit['html_url'], 'public_release': False})

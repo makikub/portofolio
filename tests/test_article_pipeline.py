@@ -73,6 +73,22 @@ class Gates(unittest.TestCase):
         s=seed(); s['id']='../../escape'
         with self.assertRaises(p.GateError): p.validate(s,self.config)
 
+    def test_collection_preserves_timezone_in_query(self):
+        from urllib.parse import parse_qs, urlsplit
+        from datetime import datetime, timezone
+        now = datetime(2026, 10, 31, 12, 30, 45, tzinfo=timezone.utc)
+        requests = []
+        def api(path):
+            requests.append(path)
+            return {'visibility': 'public'} if '?' not in path else []
+        self.config['collect_repos'] = ['makikub/portofolio']
+        with tempfile.TemporaryDirectory() as tmp, patch.object(p.dt, 'datetime') as clock, patch.object(p, 'gh', side_effect=api):
+            clock.now.return_value = now
+            self.assertEqual(p.collect(self.config, Path(tmp))['count'], 0)
+        query = urlsplit(requests[1]).query
+        self.assertIn('%2B00%3A00', query)
+        self.assertEqual(parse_qs(query), {'per_page': ['100'], 'since': ['2026-10-24T12:30:45+00:00']})
+
     def test_empty_collection(self):
         with tempfile.TemporaryDirectory() as tmp:
             self.assertEqual(p.collect(self.config,Path(tmp))['count'],0)
